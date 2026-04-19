@@ -418,7 +418,7 @@ const ContactSection = () => {
               jadovdav@gmail.com
             </a>
             <div className="hidden md:block w-2 h-2 rounded-full bg-brand-blue" />
-            <p className="text-2xl md:text-4xl font-light">+1 (415) 555-0123</p>
+            <p className="text-2xl md:text-4xl font-light">+1 (973) 275-7624</p>
           </div>
 
           <button className="px-12 py-6 border border-white text-white font-mono text-xs uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500 flex items-center gap-4 mx-auto group">
@@ -437,8 +437,16 @@ const ContactSection = () => {
             <p className="text-sm text-white/40">© 2026 A Dove's Purpose. All rights reserved.</p>
           </div>
           <div className="flex gap-8">
-            {['Twitter', 'LinkedIn', 'Dribbble', 'Behance'].map((social) => (
-              <a key={social} href="#" className="text-sm text-white/60 hover:text-white transition-colors">{social}</a>
+            {['Instagram'].map((social) => (
+              <a 
+                key={social} 
+                href="https://www.instagram.com/graphics_by_jd/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-sm text-white/60 hover:text-white transition-colors"
+              >
+                {social}
+              </a>
             ))}
           </div>
         </div>
