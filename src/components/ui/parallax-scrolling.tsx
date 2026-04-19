@@ -1,117 +1,64 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
+import React from 'react';
 
 export function ParallaxComponent() {
-  const parallaxRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const triggerElement = parallaxRef.current?.querySelector('[data-parallax-layers]');
-
-    if (triggerElement) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: triggerElement,
-          start: "0% 0%",
-          end: "100% 0%",
-          scrub: 0
-        }
-      });
-
-      const layers = [
-        { layer: "1", yPercent: 70 },
-        { layer: "2", yPercent: 55 },
-        { layer: "3", yPercent: 40 },
-        { layer: "4", yPercent: 10 }
-      ];
-
-      layers.forEach((layerObj, idx) => {
-        tl.to(
-          triggerElement.querySelectorAll(`[data-parallax-layer="${layerObj.layer}"]`),
-          {
-            yPercent: layerObj.yPercent,
-            ease: "none"
-          },
-          idx === 0 ? undefined : "<"
-        );
-      });
-    }
-
-    const lenis = new Lenis();
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-    gsap.ticker.lagSmoothing(0);
-
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      if (triggerElement) gsap.killTweensOf(triggerElement);
-      lenis.destroy();
-    };
-  }, []);
-
   return (
-    <div className="parallax-scrolling" ref={parallaxRef}>
-      <section className="parallax__header relative h-[150vh] overflow-hidden bg-black">
-        <div className="parallax__visuals absolute inset-0">
-          <div className="parallax__black-line-overflow absolute inset-0 z-50 pointer-events-none border-x-[10vw] border-black"></div>
+    <div className="parallax-scrolling">
+      <section className="relative py-32 overflow-hidden bg-black border-y border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="relative h-[600px] w-full flex flex-col items-center justify-center rounded-3xl overflow-hidden bg-white/5">
+            <div className="absolute inset-0 z-0 opacity-20">
+              <img
+                src="https://lh3.googleusercontent.com/d/1-48LO4-80eUwrifzfuZCNheJ3EMWFh4h"
+                alt="Digital Frontier Archive"
+                className="w-full h-full object-cover grayscale"
+                referrerPolicy="no-referrer"
+              />
+            </div>
 
-          <div data-parallax-layers className="parallax__layers relative h-full w-full flex items-center justify-center">
-
-            <img
-              src="https://lh3.googleusercontent.com/d/1-48LO4-80eUwrifzfuZCNheJ3EMWFh4h"
-              loading="eager"
-              width="1200"
-              data-parallax-layer="1"
-              alt="Digital Frontier Archive"
-              className="parallax__layer-img absolute w-full h-full object-cover opacity-40 grayscale"
-              referrerPolicy="no-referrer"
-            />
-
-            <img
-              src="https://lh3.googleusercontent.com/d/1ljHVC8mA3FYW9oNstJiPFSUh5aW55NCf"
-              loading="eager"
-              width="1000"
-              data-parallax-layer="2"
-              alt="Design Artifact 01"
-              className="parallax__layer-img absolute w-3/4 h-3/4 object-contain opacity-60"
-              referrerPolicy="no-referrer"
-            />
-
-            <div data-parallax-layer="3" className="parallax__layer-title relative z-20">
-              <h2 className="parallax__title text-white font-display font-black text-7xl md:text-[12vw] uppercase tracking-tighter leading-none text-center">
+            <div className="relative z-20 text-center px-4">
+              <h2 className="text-white font-display font-black text-5xl md:text-8xl uppercase tracking-tighter leading-none">
                 Digital <br /> <span className="text-brand-blue italic">Frontier</span>
               </h2>
             </div>
+            
+            {/* Decoration images - static and better positioned */}
+            <div className="absolute top-10 left-10 w-32 h-32 md:w-48 md:h-48 rounded-2xl overflow-hidden border border-white/10 hidden md:block">
+              <img
+                src="https://lh3.googleusercontent.com/d/1ljHVC8mA3FYW9oNstJiPFSUh5aW55NCf"
+                alt="Design Artifact 01"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                referrerPolicy="no-referrer"
+              />
+            </div>
 
-            <img
-              src="https://lh3.googleusercontent.com/d/1vH3sjcUfVR7fdND5VMb_S7jrSVioz7jy"
-              loading="eager"
-              width="800"
-              data-parallax-layer="4"
-              alt="Design Artifact 02"
-              className="parallax__layer-img absolute w-1/2 h-1/2 object-contain bottom-[-10%] right-[-5%] opacity-80 shadow-2xl"
-              referrerPolicy="no-referrer"
-            />
-
+            <div className="absolute bottom-10 right-10 w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border border-white/10 shadow-2xl hidden md:block">
+              <img
+                src="https://lh3.googleusercontent.com/d/1vH3sjcUfVR7fdND5VMb_S7jrSVioz7jy"
+                alt="Design Artifact 02"
+                className="w-full h-full object-cover transition-all duration-500"
+                referrerPolicy="no-referrer"
+              />
+            </div>
           </div>
-
-          <div className="parallax__fade absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent z-30"></div>
         </div>
       </section>
 
       <section className="parallax__content bg-black py-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" fill="none" className="osmo-icon-svg mx-auto mb-12 text-brand-blue">
-            <path d="M80 0L98.5 61.5H160L111 99L129.5 160.5L80 123L30.5 160.5L49 99L0 61.5H61.5L80 0Z" fill="currentColor"></path>
-          </svg>
-          <p className="text-white/60 text-xl md:text-2xl font-medium tracking-wide leading-relaxed">
-            Exploring the intersection of <span className="text-white">human intuition</span> and <span className="text-brand-blue">machine precision</span>. 
-            Crafting digital experiences that transcend the ordinary.
+          <img 
+            src="https://image2url.com/r2/default/images/1774816200084-6e40dd72-bbb4-4e1b-ba4e-e8d06c7ed0a3.png" 
+            alt="User Logo" 
+            className="h-24 w-auto mx-auto mb-12 brightness-0 invert opacity-80"
+            referrerPolicy="no-referrer"
+          />
+          <p className="text-white text-2xl md:text-4xl font-display font-black tracking-tighter uppercase leading-tight mb-6">
+            Pioneering digital <span className="text-brand-blue">excellence</span> <br /> through meticulous design.
+          </p>
+          <div className="w-20 h-1 bg-brand-blue mx-auto mb-8" />
+          <p className="text-white/40 text-sm md:text-base font-mono uppercase tracking-[0.3em] max-w-2xl mx-auto">
+            Translating complex ideas into seamless user journeys since 2018.
           </p>
         </div>
       </section>

@@ -367,21 +367,13 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-32 bg-transparent overflow-hidden">
       <div className="container mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
-        <div ref={ref} className="relative">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 1 }}
-            className="relative z-10 rounded-3xl overflow-hidden aspect-[3/4] shadow-2xl"
-          >
-            <img 
-              src="https://files.catbox.moe/m5dird.png" 
-              alt="Profile"
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-          </motion.div>
-          <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-blue/10 rounded-full blur-3xl" />
+        <div ref={ref} className="relative z-10 rounded-3xl overflow-hidden aspect-[3/4] shadow-2xl">
+          <img 
+            src="https://files.catbox.moe/m5dird.png" 
+            alt="Profile"
+            className="w-full h-full object-cover"
+            referrerPolicy="no-referrer"
+          />
         </div>
 
         <div>
@@ -390,7 +382,7 @@ const AboutSection = () => {
             Jonah <br /> D.
           </h3>
           <p className="text-white/80 text-sm leading-relaxed font-medium tracking-wide mb-8">
-            I'm Jonah D, a digital creator with over 8 years of experience in the digital space. I specialize in creating immersive web experiences that leverage motion and 3D to tell a story.
+            I started 4 years ago experimenting with Photoshop, which quickly grew into a passion for sports graphics. From there, I transitioned into logo design and launched a business for local sports trainers. Today, I've expanded into building high-performance websites, blending my creative roots with modern digital solutions.
           </p>
           
           <Link to="/about" className="inline-flex items-center gap-4 px-8 py-4 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 group">
@@ -490,13 +482,13 @@ const AboutPage = () => {
             
             <div className="space-y-8 text-white/70 text-lg leading-relaxed font-medium">
               <p>
-                I'm Jonah D, a digital creator with over 8 years of experience in the digital space. I've worked with startups and global brands to build products that stand out. My approach is rooted in the belief that great design is invisible—it should feel natural and effortless.
+                I started 4 years ago experimenting with Photoshop, which quickly grew into a passion for sports graphics. What began as a hobby soon turned into something much larger as I found my rhythm in the digital design space.
               </p>
               <p>
-                I specialize in creating immersive web experiences that leverage motion and 3D to tell a story. Every pixel is intentional, every animation is purposeful. I believe that the best digital products are those that connect with users on an emotional level.
+                From sports graphics, I transitioned into logo design and launched a dedicated business creating visual identities for local sports trainers. This experience taught me the power of branding and the importance of professional digital assets for growing businesses.
               </p>
               <p>
-                Throughout my career, I've had the privilege of working on a wide range of projects, from small experimental prototypes to large-scale enterprise applications. This diverse experience has given me a unique perspective on the intersection of design and technology.
+                Today, I’ve expanded my expertise into building performance-driven websites. I combine my foundations in graphic design and branding with modern web technology to create immersive digital experiences that truly resonate with users.
               </p>
             </div>
 
@@ -513,55 +505,47 @@ const AboutPage = () => {
           </div>
         </div>
 
-        {/* New Parallax Section */}
-        <div className="mb-32">
-          <Parallax className="h-[2000px] md:h-[1500px] py-32 text-white bg-transparent border-y border-white/5">
-            <div className="sticky top-0 h-screen space-y-8 w-full flex flex-col justify-center items-center text-center px-6">
-              <StaggerText
-                className="text-5xl md:text-7xl font-display font-black tracking-tighter md:w-2/3 mx-auto uppercase leading-none"
-                text="Engineering digital experiences that define the future"
-                direction="z"
+        {/* Stable Archive Section */}
+        <div className="mb-32 py-20 border-y border-white/5">
+          <div className="text-center mb-16 px-6">
+            <h2 className="text-4xl md:text-6xl font-display font-black tracking-tighter uppercase mb-6 text-white">
+              Engineering digital experiences <br /> <span className="text-brand-blue italic">that define the future</span>
+            </h2>
+            <p className="max-w-prose mx-auto text-white/60 text-lg font-medium leading-relaxed mb-12">
+              Defining the intersection of technical excellence and visual storytelling. 
+              Creating digital identities that resonate with the next generation of users.
+            </p>
+            <Button className="bg-brand-blue hover:bg-brand-blue/80 text-white font-mono text-[10px] uppercase tracking-[0.3em] px-12 py-6 rounded-none border border-white/10" size="lg">
+              Explore the Archive
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+            <div className="aspect-[3/4]">
+              <img
+                className="size-full object-cover rounded-2xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-500"
+                src="https://s0.wp.com/mshots/v1/https%3A%2F%2F724-baseball-nwc6.vercel.app%2F?w=1200&h=800"
+                alt="724 Baseball"
+                referrerPolicy="no-referrer"
               />
-
-              <p className="max-w-prose text-white/60 text-lg font-medium leading-relaxed">
-                Defining the intersection of technical excellence and visual storytelling. 
-                Creating digital identities that resonate with the next generation of users.
-              </p>
-
-              <Button className="bg-brand-blue hover:bg-brand-blue/80 text-white font-mono text-[10px] uppercase tracking-[0.3em] px-12 py-6 rounded-none border border-white/10" size="lg">
-                Explore the Archive
-              </Button>
             </div>
-
-            <PrallaxContainer className="flex flex-wrap justify-between gap-8 w-full mt-20">
-              <ParallaxItem className="w-11/12 md:w-1/4 aspect-[3/4]" start={200} end={-200}>
-                <img
-                  className="size-full object-cover rounded-2xl border border-white/10"
-                  src="https://s0.wp.com/mshots/v1/https%3A%2F%2F724-baseball-nwc6.vercel.app%2F?w=1200&h=800"
-                  alt="724 Baseball"
-                  referrerPolicy="no-referrer"
-                />
-              </ParallaxItem>
-
-              <ParallaxItem className="w-11/12 md:w-1/4 aspect-[3/4]" start={500} end={20}>
-                <img
-                  className="size-full object-cover rounded-2xl border border-white/10"
-                  src="https://s0.wp.com/mshots/v1/https%3A%2F%2Frex-soccer-training.vercel.app%2F?w=1200&h=800"
-                  alt="REX Soccer"
-                  referrerPolicy="no-referrer"
-                />
-              </ParallaxItem>
-
-              <ParallaxItem className="w-11/12 md:w-1/4 aspect-[3/4]" start={800} end={50}>
-                <img
-                  className="size-full object-cover rounded-2xl border border-white/10"
-                  src="https://s0.wp.com/mshots/v1/https%3A%2F%2Fdo-it-once.vercel.app%2F?w=1200&h=800"
-                  alt="Do It Once"
-                  referrerPolicy="no-referrer"
-                />
-              </ParallaxItem>
-            </PrallaxContainer>
-          </Parallax>
+            <div className="aspect-[3/4]">
+              <img
+                className="size-full object-cover rounded-2xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-500"
+                src="https://s0.wp.com/mshots/v1/https%3A%2F%2Frex-soccer-training.vercel.app%2F?w=1200&h=800"
+                alt="REX Soccer"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <div className="aspect-[3/4]">
+              <img
+                className="size-full object-cover rounded-2xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-500"
+                src="https://s0.wp.com/mshots/v1/https%3A%2F%2Fdo-it-once.vercel.app%2F?w=1200&h=800"
+                alt="Do It Once"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="mb-32">
