@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView, useMotionValueEvent, AnimatePresence, useMotionValue } from 'framer-motion';
-import { ArrowUpRight, Github, Instagram, Twitter, Youtube, Menu, X, ChevronDown, ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, Github, Instagram, Twitter, Youtube, Menu, X, ChevronDown, ArrowLeft, ArrowRight, Users } from 'lucide-react';
 import Lenis from 'lenis';
 import { cn } from '@/src/lib/utils';
 import { BrowserRouter, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
@@ -1103,7 +1103,7 @@ const GraphicsPage = () => {
         >
           <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-4">Portfolio / Archive</h2>
           <h1 className="text-5xl md:text-8xl font-display font-black text-white uppercase tracking-tighter leading-none mb-8">
-            Graphic <span className="text-brand-blue italic">Design</span>
+            Visual <span className="text-brand-blue italic">Concepts</span>
           </h1>
           <div className="flex flex-wrap items-center gap-6">
             <p className="text-white/40 max-w-xl text-sm leading-relaxed">
@@ -1179,7 +1179,7 @@ const GraphicsPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-12 bg-black/95 backdrop-blur-xl"
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-xl"
             onClick={() => setSelectedImage(null)}
           >
             <motion.div
@@ -1187,26 +1187,26 @@ const GraphicsPage = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative max-w-5xl w-full max-h-full aspect-auto rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
+              className="relative max-w-fit max-h-fit rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black"
               onClick={(e) => e.stopPropagation()}
             >
               <button 
                 onClick={() => setSelectedImage(null)}
                 className="absolute top-6 right-6 z-50 p-3 bg-black/50 hover:bg-brand-blue text-white rounded-full backdrop-blur-md transition-colors"
               >
-                <X size={24} />
+                <X size={20} />
               </button>
               
               <img 
                 src={`https://lh3.googleusercontent.com/d/${selectedImage}`}
                 alt="Full Preview"
-                className="w-full h-full object-contain"
+                className="max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain block mx-auto"
                 referrerPolicy="no-referrer"
               />
               
-              <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black to-transparent">
+              <div className="p-8 bg-gradient-to-t from-black to-transparent border-t border-white/5">
                 <h3 className="text-white font-display font-black text-3xl uppercase tracking-tighter">Visual Concept Detail</h3>
-                <p className="text-white/60 text-sm mt-2">High-resolution archive artifact.</p>
+                <p className="text-white/60 text-sm mt-2 font-mono uppercase tracking-widest">Archive ID: {selectedImage.substring(0, 8)}...</p>
               </div>
             </motion.div>
           </motion.div>
@@ -1224,6 +1224,148 @@ const GraphicsPage = () => {
   );
 };
 
+const CommunitySection = () => {
+  return (
+    <section className="py-32 bg-black border-y border-white/5 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/5 rounded-full blur-[150px] -mr-64 -mt-64" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-20">
+          <div className="flex-1">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-6">Social Impact</h2>
+              <h3 className="text-5xl md:text-8xl font-display font-black text-white uppercase tracking-tighter mb-8 leading-[0.9]">
+                Design for <br /> <span className="text-brand-blue italic">Community</span>
+              </h3>
+              <p className="text-white/60 text-lg md:text-xl font-medium tracking-wide leading-relaxed mb-12 max-w-2xl">
+                Beyond the screen, design has the power to unite and inspire. I partner with local organizations and social initiatives to craft visual stories that resonate within our community.
+              </p>
+              
+              <Link to="/community">
+                <button className="px-12 py-6 border border-white text-white font-mono text-[10px] uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500 flex items-center gap-4 group">
+                  Explore Community Work <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                </button>
+              </Link>
+            </motion.div>
+          </div>
+          
+          <div className="lg:w-1/3 w-full">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="aspect-square rounded-full border border-white/10 flex items-center justify-center relative bg-white/5"
+            >
+              <div className="absolute inset-0 rounded-full border border-brand-blue/20 animate-ping opacity-20" />
+              <Users size={80} className="text-brand-blue opacity-40" />
+              
+              {/* Floating Labels */}
+              <div className="absolute top-1/4 -right-4 bg-white/10 backdrop-blur-md px-4 py-2 border border-white/10 text-white font-mono text-[8px] uppercase tracking-widest">Client Work</div>
+              <div className="absolute bottom-1/4 -left-12 bg-brand-blue/20 backdrop-blur-md px-4 py-2 border border-brand-blue/30 text-white font-mono text-[8px] uppercase tracking-widest">Volunteer</div>
+              <div className="absolute top-10 left-10 bg-white/10 backdrop-blur-md px-4 py-2 border border-white/10 text-white font-mono text-[8px] uppercase tracking-widest">Non-Profit</div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const CommunityPage = () => {
+  const socialProjects = [
+    {
+      title: "Millburn 250th",
+      category: "Municipal Branding / Volunteer",
+      description: "An award-winning visual identity for Millburn Township. A blend of history and modernity designed for the community's milestone celebration.",
+      image: "/52901996075.png"
+    },
+    {
+      title: "Influencer Brand",
+      category: "Personal Brand Identity / Client",
+      description: "Crafting a unique visual narrative for a high-profile influencer, centering on authenticity and aesthetic digital presence.",
+      image: "/MomLogo.png"
+    },
+    {
+      title: "Local Sports Training",
+      category: "Community Business / Client",
+      description: "Developing robust visual systems for local athletic programs, focusing on energy, performance, and professional appeal.",
+      image: "https://files.catbox.moe/m5dird.png"
+    },
+    {
+       title: "Youth Outreach",
+       category: "Social Initiative / Volunteer",
+       description: "Creating engaging visual materials for youth-focused programs to foster participation and increase community visibility.",
+       image: "https://lh3.googleusercontent.com/d/1ljHVC8mA3FYW9oNstJiPFSUh5aW55NCf"
+    }
+  ];
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="pt-40 pb-40"
+    >
+      <div className="container mx-auto px-6">
+        <div className="mb-40 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-6">Partnerships / Advocacy</h2>
+            <h1 className="text-7xl md:text-[12vw] font-display font-black tracking-tighter text-white uppercase mb-12 leading-[0.85]">
+              Comm<span className="text-brand-blue italic">unity</span>
+            </h1>
+            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium tracking-wide leading-relaxed">
+              Leveraging design to empower <span className="text-white">local voices, non-profits, and cultural initiatives.</span> Every project is a commitment to positive social resonance.
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {socialProjects.map((project, index) => (
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.8 }}
+              className="group"
+            >
+              <div className="relative aspect-[16/9] mb-10 overflow-hidden rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 scale-100 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-brand-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              </div>
+              <h3 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{project.category}</h3>
+              <h4 className="text-4xl font-display font-black text-white uppercase tracking-tighter mb-4">{project.title}</h4>
+              <p className="text-white/40 text-sm max-w-md leading-relaxed">{project.description}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-64 text-center">
+          <Link to="/" className="inline-flex items-center gap-6 px-12 py-6 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 group">
+            <ArrowLeft size={18} className="group-hover:-translate-x-2 transition-transform" /> 
+            <span className="font-mono text-[10px] uppercase tracking-[0.4em]">Back to Hub</span>
+          </Link>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const HomePage = () => {
   return (
     <motion.div
@@ -1232,6 +1374,7 @@ const HomePage = () => {
       exit={{ opacity: 0 }}
     >
       <Hero />
+      <CommunitySection />
       <ParallaxComponent />
       <AboutSection />
       <ContactSection />
@@ -1287,6 +1430,7 @@ export default function App() {
               <Route path="/work/logos" element={<LogosPage />} />
               <Route path="/work/graphics" element={<GraphicsPage />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/community" element={<CommunityPage />} />
             </Routes>
           </AnimatePresence>
         </div>
