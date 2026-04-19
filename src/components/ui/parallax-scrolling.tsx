@@ -19,7 +19,7 @@ export function ParallaxComponent() {
 
             <div className="relative z-20 text-center px-4">
               <h2 className="text-white font-display font-black text-5xl md:text-8xl uppercase tracking-tighter leading-none">
-                Digital <br /> <span className="text-brand-blue italic">Frontier</span>
+                Creative <br /> <span className="text-brand-blue italic">Archive</span>
               </h2>
             </div>
             

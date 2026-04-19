@@ -117,12 +117,16 @@ const SketchfabViewer = ({ scrollProgress }: { scrollProgress: any }) => {
   });
 
   return (
-    <iframe
-      ref={iframeRef}
-      title="Sketchfab Model"
-      className="w-full h-full border-0 pointer-events-none" 
-      allow="autoplay; fullscreen; xr-spatial-tracking"
-    />
+    <div className="w-full h-full relative overflow-hidden flex items-center justify-center">
+      <div className="absolute inset-[-10%] w-[120%] h-[120%] pointer-events-none">
+        <iframe
+          ref={iframeRef}
+          title="Sketchfab Model"
+          className="w-full h-full border-0" 
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+        />
+      </div>
+    </div>
   );
 };
 
@@ -218,15 +222,14 @@ const Hero = () => {
                   Creating interfaces that blend function with emotion, crafting digital experiences that feel intuitive, seamless, and meaningful.
                 </p>
                 <div className="flex gap-3 mt-6">
-                  <div className="w-10 h-10 border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-white hover:text-black transition-all duration-300">
-                    <X size={16} />
-                  </div>
-                  <div className="w-10 h-10 border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-white hover:text-black transition-all duration-300">
+                  <a 
+                    href="https://www.instagram.com/graphics_by_jd/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-white hover:text-black transition-all duration-300"
+                  >
                     <Instagram size={16} />
-                  </div>
-                  <div className="w-10 h-10 border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-white hover:text-black transition-all duration-300">
-                    <Youtube size={16} />
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -506,14 +509,14 @@ const AboutPage = () => {
                 <p className="text-sm text-white/40 uppercase tracking-widest mt-2">Projects Done</p>
               </div>
               <div>
-                <p className="text-5xl font-display font-bold text-white">15+</p>
+                <p className="text-5xl font-display font-bold text-white">4+</p>
                 <p className="text-sm text-white/40 uppercase tracking-widest mt-2">Awards Won</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Stable Archive Section */}
+        {/* Stable Archive Section - Showing only REX Soccer */}
         <div className="mb-32 py-20 border-y border-white/5">
           <div className="text-center mb-16 px-6">
             <h2 className="text-4xl md:text-6xl font-display font-black tracking-tighter uppercase mb-6 text-white">
@@ -523,33 +526,19 @@ const AboutPage = () => {
               Defining the intersection of technical excellence and visual storytelling. 
               Creating digital identities that resonate with the next generation of users.
             </p>
-            <Button className="bg-brand-blue hover:bg-brand-blue/80 text-white font-mono text-[10px] uppercase tracking-[0.3em] px-12 py-6 rounded-none border border-white/10" size="lg">
-              Explore the Archive
-            </Button>
+            <Link to="/work/websites">
+              <Button className="bg-brand-blue hover:bg-brand-blue/80 text-white font-mono text-[10px] uppercase tracking-[0.3em] px-12 py-6 rounded-none border border-white/10" size="lg">
+                Explore the Archive
+              </Button>
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
-            <div className="aspect-[3/4]">
-              <img
-                className="size-full object-cover rounded-2xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-500"
-                src="https://s0.wp.com/mshots/v1/https%3A%2F%2F724-baseball-nwc6.vercel.app%2F?w=1200&h=800"
-                alt="724 Baseball"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-            <div className="aspect-[3/4]">
+          <div className="flex justify-center px-6">
+            <div className="aspect-[3/4] max-w-sm w-full">
               <img
                 className="size-full object-cover rounded-2xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-500"
                 src="https://s0.wp.com/mshots/v1/https%3A%2F%2Frex-soccer-training.vercel.app%2F?w=1200&h=800"
                 alt="REX Soccer"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-            <div className="aspect-[3/4]">
-              <img
-                className="size-full object-cover rounded-2xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-500"
-                src="https://s0.wp.com/mshots/v1/https%3A%2F%2Fdo-it-once.vercel.app%2F?w=1200&h=800"
-                alt="Do It Once"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -970,7 +959,7 @@ const WebsitesPage = () => {
         </div>
 
         <div className="space-y-64">
-          {websites.map((site, index) => (
+          {websites.filter(s => s.name === "REX Soccer").map((site, index) => (
             <WebsiteCard key={index} site={site} index={index} />
           ))}
         </div>
@@ -995,10 +984,10 @@ const LogosPage = () => {
       category: "Municipal Branding"
     },
     {
-      name: "Mom's Bakery",
-      description: "A cozy, artisanal brand identity developed for a family-owned local bakery. The 'MomLogo' concept centers on the feeling of home-baked nostalgia, utilizing warm, organic textures and soft typography to evoke comfort and quality. The logo was designed to be highly versatile, maintaining its distinctive charm across everything from minimalist packaging and social media menus to large-scale shopfront signage, positioning the business as a welcoming staple in the neighborhood.",
+      name: "Artisanal Baking Narrative",
+      description: "A refined brand identity and visual strategy developed for a boutique artisanal baking influencer. This project transformed a personal Instagram journey into a professional digital presence, capturing the warmth of home-baked craftsmanship through sophisticated typography and soft, organic palettes. The identity was crafted to elevate social media content and position the account for high-level culinary collaborations while honoring its authentic roots.",
       image: "/MomLogo.png",
-      category: "Small Business Identity"
+      category: "Digital Brand Identity"
     }
   ];
 
