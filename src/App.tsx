@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView, useMotionValueEvent, AnimatePresence, useMotionValue } from 'framer-motion';
 import { ArrowUpRight, Github, Instagram, Twitter, Youtube, Menu, X, ChevronDown, ArrowLeft, ArrowRight, Users } from 'lucide-react';
 import Lenis from 'lenis';
@@ -22,40 +22,106 @@ const ScrollToTop = () => {
 // --- Components ---
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
+  const navLinks = [
+    { name: 'Home', path: '/', desktop: true },
+    { name: 'About', path: '/about', desktop: true },
+    { name: 'Work', path: '/work', desktop: true },
+    { name: 'Contact', path: isHomePage ? '#contact' : '/#contact', desktop: true, isHash: true },
+  ];
+
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
-      <div className="liquid-glass rounded-full p-2 flex justify-between items-center">
-        <div className="flex-1 flex justify-center">
-          <Link to="/" className="px-6 py-2 border border-brand-blue/50 text-white hover:bg-brand-blue transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Home</Link>
-        </div>
-        <div className="flex-1 flex justify-center">
-          <Link to="/about" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">About</Link>
-        </div>
-        <div className="flex-1 flex justify-center">
-          <Link to="/" className="flex items-center justify-center group">
-            <img 
-              src="https://image2url.com/r2/default/images/1774816200084-6e40dd72-bbb4-4e1b-ba4e-e8d06c7ed0a3.png" 
-              alt="Logo" 
-              className="h-8 w-auto brightness-0 invert opacity-50 group-hover:opacity-100 transition-opacity"
-              referrerPolicy="no-referrer"
-            />
-          </Link>
-        </div>
-        <div className="flex-1 flex justify-center">
-          <Link to="/work" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Work</Link>
-        </div>
-        <div className="flex-1 flex justify-center">
-          {isHomePage ? (
-            <a href="#contact" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Contact</a>
-          ) : (
-            <Link to="/#contact" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Contact</Link>
-          )}
+    <>
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-6xl">
+        <div className="liquid-glass rounded-full p-2 flex justify-between items-center px-6 md:px-2">
+          {/* Desktop Left */}
+          <div className="hidden md:flex flex-1 justify-center">
+            <Link to="/" className="px-6 py-2 border border-brand-blue/50 text-white hover:bg-brand-blue transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Home</Link>
+          </div>
+          <div className="hidden md:flex flex-1 justify-center">
+            <Link to="/about" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">About</Link>
+          </div>
+
+          {/* Center Logo */}
+          <div className="flex-none md:flex-1 flex justify-center">
+            <Link to="/" className="flex items-center justify-center group" onClick={() => setIsOpen(false)}>
+              <img 
+                src="https://image2url.com/r2/default/images/1774816200084-6e40dd72-bbb4-4e1b-ba4e-e8d06c7ed0a3.png" 
+                alt="Logo" 
+                className="h-8 w-auto brightness-0 invert opacity-50 group-hover:opacity-100 transition-opacity"
+                referrerPolicy="no-referrer"
+              />
+            </Link>
+          </div>
+
+          {/* Desktop Right */}
+          <div className="hidden md:flex flex-1 justify-center">
+            <Link to="/work" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Work</Link>
+          </div>
+          <div className="hidden md:flex flex-1 justify-center">
+            {navLinks[3].isHash && isHomePage ? (
+              <a href="#contact" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Contact</a>
+            ) : (
+              <Link to="/#contact" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Contact</Link>
+            )}
+          </div>
+
+          {/* Mobile Toggle */}
+          <div className="flex md:hidden flex-none">
+            <button 
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 text-white/60 hover:text-white transition-colors"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-[90] bg-black/95 backdrop-blur-2xl md:hidden flex items-center justify-center pt-24"
+          >
+            <div className="flex flex-col items-center gap-8">
+              {navLinks.map((link) => (
+                link.isHash && isHomePage ? (
+                  <a 
+                    key={link.name}
+                    href={link.path} 
+                    onClick={() => setIsOpen(false)}
+                    className="text-4xl font-display font-black text-white uppercase tracking-tighter hover:text-brand-blue transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link 
+                    key={link.name}
+                    to={link.path} 
+                    onClick={() => setIsOpen(false)}
+                    className="text-4xl font-display font-black text-white uppercase tracking-tighter hover:text-brand-blue transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                )
+              ))}
+              <div className="mt-8 flex gap-6">
+                <a href="https://www.instagram.com/graphics_by_jd/" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full border border-white/10 text-white hover:bg-brand-blue hover:border-brand-blue transition-all">
+                  <Instagram size={24} />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
@@ -213,15 +279,15 @@ const Hero = () => {
           {/* Content Overlays */}
           <motion.div 
             style={{ scale: contentScale, opacity: contentOpacity }}
-            className="absolute inset-0 z-20 pt-32 pb-12 px-12 flex flex-col justify-between pointer-events-none"
+            className="absolute inset-0 z-20 pt-32 md:pt-32 pb-12 px-6 md:px-12 flex flex-col justify-center md:justify-between pointer-events-none"
           >
-            <div className="flex justify-between items-start">
+            <div className="flex justify-center md:justify-between items-center md:items-start text-center md:text-left">
               <div className="max-w-xs pointer-events-auto">
-                <h2 className="text-white font-display text-4xl mb-4 tracking-tighter font-black uppercase">Jonah D</h2>
-                <p className="text-white/80 text-xs leading-relaxed font-medium tracking-wide">
-                  Creating interfaces that blend function with emotion, crafting digital experiences that feel intuitive, seamless, and meaningful.
+                <h2 className="text-white font-display text-4xl md:text-4xl mb-4 tracking-tighter font-black uppercase">Jonah D</h2>
+                <p className="text-white/80 text-[10px] md:text-xs leading-relaxed font-medium tracking-wide">
+                  Creating interfaces that blend function with emotion, crafting digital experiences that fuel social progress and meaningful human connection.
                 </p>
-                <div className="flex gap-3 mt-6">
+                <div className="flex justify-center md:justify-start gap-3 mt-6">
                   <a 
                     href="https://www.instagram.com/graphics_by_jd/" 
                     target="_blank" 
@@ -234,12 +300,12 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="flex justify-end items-end">
-              <div className="max-w-xs text-right pointer-events-auto">
-                <p className="text-white/80 text-xs leading-relaxed mb-8 font-medium tracking-wide">
-                  Merging design thinking with human insight to create digital experiences that don't just look great — they perform effortlessly.
+            <div className="flex justify-center md:justify-end items-center md:items-end text-center md:text-right mt-12 md:mt-0">
+              <div className="max-w-xs pointer-events-auto">
+                <p className="text-white/80 text-[10px] md:text-xs leading-relaxed mb-8 font-medium tracking-wide">
+                  Merging design thinking with positive impact to create digital experiences that don't just look great — they drive collective change.
                 </p>
-                <button className="px-10 py-4 border border-white text-white font-mono text-[10px] uppercase tracking-[0.3em] flex items-center gap-4 ml-auto hover:bg-white hover:text-black transition-all duration-500 group">
+                <button className="px-10 py-4 border border-white text-white font-mono text-[10px] uppercase tracking-[0.3em] flex items-center gap-4 mx-auto md:ml-auto hover:bg-white hover:text-black transition-all duration-500 group">
                   Let's Talk <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </button>
               </div>
@@ -258,8 +324,8 @@ const ProjectCard: React.FC<{ project: any; index: number }> = ({ project, index
     offset: ["start end", "end start"]
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]); // Reduced parallax for better mobile control
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
 
   const ButtonContent = () => (
     <>
@@ -275,17 +341,17 @@ const ProjectCard: React.FC<{ project: any; index: number }> = ({ project, index
       ref={ref}
       style={{ scale }}
       className={cn(
-        "relative w-full min-h-[80vh] flex items-center mb-32",
+        "relative w-full min-h-[60vh] md:min-h-[80vh] flex items-center mb-20 md:mb-32",
         index % 2 === 0 ? "justify-start" : "justify-end"
       )}
     >
       <div className={cn(
-        "w-full md:w-3/4 relative group",
+        "w-full md:w-3/4 relative group flex flex-col md:block",
         index % 2 === 0 ? "md:pr-20" : "md:pl-20"
       )}>
         <motion.div 
-          style={{ y }}
-          className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl"
+          style={{ y: typeof window !== 'undefined' && window.innerWidth > 768 ? y : 0 }}
+          className="relative aspect-[4/3] md:aspect-video rounded-2xl overflow-hidden shadow-2xl z-0"
         >
           <img 
             src={project.image} 
@@ -296,11 +362,11 @@ const ProjectCard: React.FC<{ project: any; index: number }> = ({ project, index
         </motion.div>
 
         <div className={cn(
-          "absolute top-1/2 -translate-y-1/2 z-10 p-8 md:p-12 bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl max-w-md shadow-2xl",
-          index % 2 === 0 ? "right-0 md:-right-10" : "left-0 md:-left-10"
+          "relative md:absolute md:top-1/2 md:-translate-y-1/2 z-10 p-8 md:p-12 bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl max-w-md shadow-2xl mt-[-40px] md:mt-0 mx-4 md:mx-0",
+          index % 2 === 0 ? "md:right-0 md:-right-10" : "md:left-0 md:-left-10"
         )}>
           <p className="text-[10px] font-black text-brand-blue uppercase tracking-[0.4em] mb-4">{project.category}</p>
-          <h3 className="text-3xl md:text-4xl font-display font-black mb-4 text-white tracking-tighter">{project.title}</h3>
+          <h3 className="text-3xl md:text-4xl font-display font-black mb-4 text-white tracking-tighter uppercase">{project.title}</h3>
           <p className="text-white/60 mb-8 leading-relaxed text-sm font-medium">{project.description}</p>
           
           {project.link ? (
@@ -344,12 +410,12 @@ const WorkSection = () => {
   ];
 
   return (
-    <section id="work" className="py-32 bg-transparent">
+    <section id="work" className="py-20 md:py-32 bg-transparent">
       <div className="container mx-auto px-6">
-        <div className="mb-24">
-          <h2 className="text-[10px] font-black text-brand-blue uppercase tracking-[0.5em] mb-4">Selected Works</h2>
-          <p className="text-5xl md:text-7xl font-display font-black tracking-tighter max-w-3xl text-white uppercase">
-            Blending precision with <span className="text-white/30 italic">creative soul.</span>
+        <div className="mb-16 md:mb-24">
+          <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-4">Selected Works</h2>
+          <p className="text-4xl md:text-7xl font-display font-black tracking-tighter max-w-3xl text-white uppercase leading-none md:leading-normal">
+            Blending precision with <span className="text-white/30 italic font-medium">creative soul.</span>
           </p>
         </div>
 
@@ -368,9 +434,9 @@ const AboutSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-32 bg-transparent overflow-hidden">
-      <div className="container mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
-        <div ref={ref} className="relative z-10 rounded-3xl overflow-hidden aspect-[3/4] shadow-2xl">
+    <section id="about" className="py-20 md:py-32 bg-transparent overflow-hidden">
+      <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <div ref={ref} className="relative z-10 rounded-3xl overflow-hidden aspect-[4/5] md:aspect-[3/4] shadow-2xl">
           <img 
             src="https://files.catbox.moe/m5dird.png" 
             alt="Profile"
@@ -380,12 +446,12 @@ const AboutSection = () => {
         </div>
 
         <div>
-          <h2 className="text-[10px] font-black text-brand-blue uppercase tracking-[0.5em] mb-6">The Designer</h2>
-          <h3 className="text-4xl md:text-6xl font-display font-black mb-8 tracking-tighter text-white uppercase">
+          <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-6">The Designer</h2>
+          <h3 className="text-4xl md:text-6xl font-display font-black mb-8 tracking-tighter text-white uppercase text-gradient">
             Jonah <br /> D.
           </h3>
-          <p className="text-white/80 text-sm leading-relaxed font-medium tracking-wide mb-8">
-            I started 4 years ago experimenting with Photoshop, which quickly grew into a passion for sports graphics. From there, I transitioned into logo design and launched a business for local sports trainers. Today, I've expanded into building high-performance websites, blending my creative roots with modern digital solutions.
+          <p className="text-white/80 text-sm md:text-base leading-relaxed font-medium tracking-wide mb-8 italic">
+            "I started 4 years ago experimenting with Photoshop, which quickly grew into a passion for sports graphics. From there, I transitioned into logo design and launched a business for local sports trainers. Today, I've expanded into building high-performance websites, blending my creative roots with modern digital solutions."
           </p>
           
           <Link to="/about" className="inline-flex items-center gap-4 px-8 py-4 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 group">
@@ -400,7 +466,7 @@ const AboutSection = () => {
 
 const ContactSection = () => {
   return (
-    <section id="contact" className="py-32 bg-transparent text-white relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-32 bg-transparent text-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#0066FF,transparent_50%)]" />
       </div>
@@ -411,33 +477,33 @@ const ContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-[10px] font-black text-brand-blue uppercase tracking-[0.5em] mb-8">Get in Touch</h2>
-          <p className="text-5xl md:text-8xl font-display font-black tracking-tighter mb-12 uppercase">
-            Let's build something <br /> <span className="text-brand-blue">extraordinary.</span>
+          <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-8">Get in Touch</h2>
+          <p className="text-4xl md:text-8xl font-display font-black tracking-tighter mb-12 uppercase leading-none md:leading-tight">
+            Let's build something <br /> <span className="text-brand-blue italic">extraordinary.</span>
           </p>
           
-          <div className="flex flex-col md:flex-row justify-center items-center gap-8 mb-20">
-            <a href="mailto:jadovdav@gmail.com" className="text-2xl md:text-4xl font-light hover:text-brand-blue transition-colors">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-8 mb-20">
+            <a href="mailto:jadovdav@gmail.com" className="text-xl md:text-4xl font-light hover:text-brand-blue transition-colors break-all md:break-normal">
               jadovdav@gmail.com
             </a>
             <div className="hidden md:block w-2 h-2 rounded-full bg-brand-blue" />
-            <p className="text-2xl md:text-4xl font-light">+1 (973) 275-7624</p>
+            <p className="text-xl md:text-4xl font-light">+1 (973) 275-7624</p>
           </div>
 
-          <button className="px-12 py-6 border border-white text-white font-mono text-xs uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500 flex items-center gap-4 mx-auto group">
+          <button className="px-10 md:px-12 py-5 md:py-6 border border-white text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500 flex items-center gap-4 mx-auto group">
             Start a Project <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </button>
         </motion.div>
 
-        <div className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-4">
+        <div className="mt-20 md:mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-4">
             <img 
               src="https://image2url.com/r2/default/images/1774816200084-6e40dd72-bbb4-4e1b-ba4e-e8d06c7ed0a3.png" 
               alt="Logo" 
-              className="h-8 w-auto brightness-0 invert"
+              className="h-8 w-auto brightness-0 invert opacity-40"
               referrerPolicy="no-referrer"
             />
-            <p className="text-sm text-white/40">© 2026 A Dove's Purpose. All rights reserved.</p>
+            <p className="text-[10px] text-white/40 uppercase tracking-widest">© 2026 A Dove's Purpose. All rights reserved.</p>
           </div>
           <div className="flex gap-8">
             {['Instagram'].map((social) => (
@@ -446,7 +512,7 @@ const ContactSection = () => {
                 href="https://www.instagram.com/graphics_by_jd/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-sm text-white/60 hover:text-white transition-colors"
+                className="text-[10px] font-mono uppercase tracking-widest text-white/40 hover:text-white transition-colors"
               >
                 {social}
               </a>
@@ -499,7 +565,7 @@ const AboutPage = () => {
                 From sports graphics, I transitioned into logo design and launched a dedicated business creating visual identities for local sports trainers. This experience taught me the power of branding and the importance of professional digital assets for growing businesses.
               </p>
               <p>
-                Today, I’ve expanded my expertise into building performance-driven websites. I combine my foundations in graphic design and branding with modern web technology to create immersive digital experiences that truly resonate with users.
+                Today, I’ve expanded my expertise into building performance-driven websites with a strong focus on <span className="text-white">social good and digital advocacy.</span> I combine my foundations in graphic design and branding with modern web technology to create immersive digital experiences that fuel social progress and community growth.
               </p>
             </div>
 
@@ -581,7 +647,7 @@ const WorkPage = () => {
             My <span className="text-brand-blue">Work</span>
           </h1>
           <p className="text-white/60 text-lg max-w-2xl mx-auto font-medium tracking-wide">
-            A curated selection of projects where I've pushed the boundaries of digital design and development.
+            A curated selection of projects driven by <span className="text-white">purpose and positive impact</span>, where design meets digital advocacy.
           </p>
         </div>
 
@@ -849,6 +915,12 @@ const WebsiteCard = ({ site, index }: { site: any; index: number }) => {
 const WebsitesPage = () => {
   const websites = [
     {
+      name: "Nines Rentals",
+      url: "https://nines-rentals.vercel.app/",
+      description: "A premium rental platform offering comprehensive property solutions with a focus on ease of use and high-end visual appeal.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fnines-rentals.vercel.app%2F?w=1200&h=800"
+    },
+    {
       name: "Munozzz",
       url: "https://munozzz.vercel.app/",
       description: "A premium lifestyle and fashion platform featuring curated collections and high-end brand identity.",
@@ -948,18 +1020,18 @@ const WebsitesPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-[10px] font-black text-brand-blue uppercase tracking-[0.5em] mb-6">Digital Showcase</h2>
-            <h1 className="text-7xl md:text-[12vw] font-display font-black tracking-tighter text-white uppercase mb-12 leading-[0.85]">
-              Web<span className="text-brand-blue italic">sites</span>
+          <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-6">Digital Showcase</h2>
+            <h1 className="text-5xl md:text-[12vw] font-display font-black tracking-tighter text-white uppercase mb-8 md:mb-12 leading-none md:leading-[0.85]">
+              Visions<span className="text-brand-blue italic">forGood</span>
             </h1>
-            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium tracking-wide leading-relaxed">
-              Pushing the boundaries of what's possible on the web. Each project is a unique blend of <span className="text-white">innovation, performance, and creative soul.</span>
+            <p className="text-white/40 text-[13px] md:text-xl max-w-3xl mx-auto font-medium tracking-wide leading-relaxed">
+              Pushing the boundaries of digital advocacy. Each project is a unique blend of <span className="text-white">innovation, social progress, and creative soul.</span>
             </p>
           </motion.div>
         </div>
 
         <div className="space-y-64">
-          {websites.filter(s => s.name === "REX Soccer").map((site, index) => (
+          {websites.filter(s => ["REX Soccer", "Nines Rentals"].includes(s.name)).map((site, index) => (
             <WebsiteCard key={index} site={site} index={index} />
           ))}
         </div>
@@ -1006,11 +1078,11 @@ const LogosPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-6">Brand Identity</h2>
-            <h1 className="text-7xl md:text-[10vw] font-display font-black tracking-tighter text-white uppercase mb-12 leading-[0.85]">
-              Logo<span className="text-brand-blue italic">Studies</span>
+            <h1 className="text-5xl md:text-[10vw] font-display font-black tracking-tighter text-white uppercase mb-8 md:mb-12 leading-none md:leading-[0.85]">
+              Visions<span className="text-brand-blue italic">forGood</span>
             </h1>
-            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium tracking-wide">
-              Distilling complex brand stories into <span className="text-white">iconic visual marks.</span> Every logo is a study in composition, balance, and strategic communication.
+            <p className="text-white/40 text-[13px] md:text-xl max-w-3xl mx-auto font-medium tracking-wide">
+              Distilling complex brand stories into <span className="text-white">marks of impact.</span> Every design is a study in purposeful balance and strategic social communication.
             </p>
           </motion.div>
         </div>
@@ -1102,11 +1174,11 @@ const GraphicsPage = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-4">Portfolio / Archive</h2>
-          <h1 className="text-5xl md:text-8xl font-display font-black text-white uppercase tracking-tighter leading-none mb-8">
+          <h1 className="text-4xl md:text-8xl font-display font-black text-white uppercase tracking-tighter leading-none mb-4 md:mb-8">
             Visual <span className="text-brand-blue italic">Concepts</span>
           </h1>
           <div className="flex flex-wrap items-center gap-6">
-            <p className="text-white/40 max-w-xl text-sm leading-relaxed">
+            <p className="text-white/40 max-w-xl text-[13px] md:text-sm leading-relaxed">
               A curated collection of visual identities, digital illustrations, and conceptual designs. 
               Each piece is a study in composition, color theory, and brand storytelling.
             </p>
@@ -1226,12 +1298,12 @@ const GraphicsPage = () => {
 
 const CommunitySection = () => {
   return (
-    <section className="py-32 bg-black border-y border-white/5 relative overflow-hidden">
+    <section className="py-20 md:py-32 bg-black border-y border-white/5 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/5 rounded-full blur-[150px] -mr-64 -mt-64" />
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-20">
-          <div className="flex-1">
+        <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-20">
+          <div className="flex-1 text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -1239,36 +1311,36 @@ const CommunitySection = () => {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-6">Social Impact</h2>
-              <h3 className="text-5xl md:text-8xl font-display font-black text-white uppercase tracking-tighter mb-8 leading-[0.9]">
+              <h3 className="text-4xl md:text-8xl font-display font-black text-white uppercase tracking-tighter mb-8 leading-[0.9]">
                 Design for <br /> <span className="text-brand-blue italic">Community</span>
               </h3>
-              <p className="text-white/60 text-lg md:text-xl font-medium tracking-wide leading-relaxed mb-12 max-w-2xl">
+              <p className="text-white/60 text-base md:text-xl font-medium tracking-wide leading-relaxed mb-12 max-w-2xl mx-auto lg:mx-0">
                 Beyond the screen, design has the power to unite and inspire. I partner with local organizations and social initiatives to craft visual stories that resonate within our community.
               </p>
               
               <Link to="/community">
-                <button className="px-12 py-6 border border-white text-white font-mono text-[10px] uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500 flex items-center gap-4 group">
+                <button className="px-10 md:px-12 py-5 md:py-6 border border-white text-white font-mono text-[10px] uppercase tracking-[0.3em] md:tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500 flex items-center gap-4 group mx-auto lg:mx-0">
                   Explore Community Work <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
                 </button>
               </Link>
             </motion.div>
           </div>
           
-          <div className="lg:w-1/3 w-full">
+          <div className="lg:w-1/3 w-full flex justify-center mt-10 lg:mt-0">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1 }}
-              className="aspect-square rounded-full border border-white/10 flex items-center justify-center relative bg-white/5"
+              className="w-64 h-64 md:aspect-square md:w-full md:h-full rounded-full border border-white/10 flex items-center justify-center relative bg-white/5"
             >
               <div className="absolute inset-0 rounded-full border border-brand-blue/20 animate-ping opacity-20" />
-              <Users size={80} className="text-brand-blue opacity-40" />
+              <Users size={60} className="text-brand-blue opacity-40 md:w-20 md:h-20" />
               
               {/* Floating Labels */}
-              <div className="absolute top-1/4 -right-4 bg-white/10 backdrop-blur-md px-4 py-2 border border-white/10 text-white font-mono text-[8px] uppercase tracking-widest">Client Work</div>
-              <div className="absolute bottom-1/4 -left-12 bg-brand-blue/20 backdrop-blur-md px-4 py-2 border border-brand-blue/30 text-white font-mono text-[8px] uppercase tracking-widest">Volunteer</div>
-              <div className="absolute top-10 left-10 bg-white/10 backdrop-blur-md px-4 py-2 border border-white/10 text-white font-mono text-[8px] uppercase tracking-widest">Non-Profit</div>
+              <div className="absolute top-1/4 -right-4 bg-white/10 backdrop-blur-md px-4 py-2 border border-white/10 text-white font-mono text-[8px] uppercase tracking-widest hidden md:block">Client Work</div>
+              <div className="absolute bottom-1/4 -left-12 bg-brand-blue/20 backdrop-blur-md px-4 py-2 border border-brand-blue/30 text-white font-mono text-[8px] uppercase tracking-widest hidden md:block">Volunteer</div>
+              <div className="absolute top-10 left-10 bg-white/10 backdrop-blur-md px-4 py-2 border border-white/10 text-white font-mono text-[8px] uppercase tracking-widest hidden md:block">Non-Profit</div>
             </motion.div>
           </div>
         </div>
@@ -1310,26 +1382,26 @@ const CommunityPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pt-40 pb-40"
+      className="pt-32 pb-24 md:pt-40 md:pb-40"
     >
       <div className="container mx-auto px-6">
-        <div className="mb-40 text-center">
+        <div className="mb-24 md:mb-40 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-6">Partnerships / Advocacy</h2>
-            <h1 className="text-7xl md:text-[12vw] font-display font-black tracking-tighter text-white uppercase mb-12 leading-[0.85]">
+            <h1 className="text-5xl md:text-[12vw] font-display font-black tracking-tighter text-white uppercase mb-8 md:mb-12 leading-none md:leading-[0.85]">
               Comm<span className="text-brand-blue italic">unity</span>
             </h1>
-            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium tracking-wide leading-relaxed">
+            <p className="text-white/40 text-lg md:text-xl max-w-3xl mx-auto font-medium tracking-wide leading-relaxed">
               Leveraging design to empower <span className="text-white">local voices, non-profits, and cultural initiatives.</span> Every project is a commitment to positive social resonance.
             </p>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {socialProjects.map((project, index) => (
             <motion.div 
               key={index}
@@ -1339,7 +1411,7 @@ const CommunityPage = () => {
               transition={{ delay: index * 0.1, duration: 0.8 }}
               className="group"
             >
-              <div className="relative aspect-[16/9] mb-10 overflow-hidden rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
+              <div className="relative aspect-video mb-8 md:mb-10 overflow-hidden rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -1348,15 +1420,15 @@ const CommunityPage = () => {
                 />
                 <div className="absolute inset-0 bg-brand-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
-              <h3 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{project.category}</h3>
-              <h4 className="text-4xl font-display font-black text-white uppercase tracking-tighter mb-4">{project.title}</h4>
-              <p className="text-white/40 text-sm max-w-md leading-relaxed">{project.description}</p>
+              <h3 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-3 md:mb-4">{project.category}</h3>
+              <h4 className="text-2xl md:text-4xl font-display font-black text-white uppercase tracking-tighter mb-4">{project.title}</h4>
+              <p className="text-white/40 text-[13px] md:text-sm max-w-md leading-relaxed">{project.description}</p>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-64 text-center">
-          <Link to="/" className="inline-flex items-center gap-6 px-12 py-6 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 group">
+        <div className="mt-40 md:mt-64 text-center">
+          <Link to="/" className="inline-flex items-center gap-6 px-10 md:px-12 py-5 md:py-6 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 group">
             <ArrowLeft size={18} className="group-hover:-translate-x-2 transition-transform" /> 
             <span className="font-mono text-[10px] uppercase tracking-[0.4em]">Back to Hub</span>
           </Link>
