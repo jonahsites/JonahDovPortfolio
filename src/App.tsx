@@ -214,46 +214,12 @@ const Hero = () => {
   const contentScale = useTransform(smoothProgress, [0, 0.6], [1, 1.2]);
   const contentOpacity = useTransform(smoothProgress, [0.6, 0.8], [1, 0]);
   
-  const starScale = useTransform(smoothProgress, [0, 1], [1, 15]);
-  const starOpacity = useTransform(smoothProgress, [0, 0.1, 0.8, 1], [0, 1, 1, 0]);
-
-  const stars = [
-    { top: '15%', left: '10%' },
-    { top: '20%', left: '85%' },
-    { top: '75%', left: '15%' },
-    { top: '80%', left: '80%' },
-    { top: '45%', left: '5%' },
-    { top: '35%', left: '95%' },
-    { top: '10%', left: '40%' },
-    { top: '60%', left: '90%' },
-    { top: '30%', left: '20%' },
-    { top: '90%', left: '50%' },
-    { top: '50%', left: '10%' },
-  ];
-
   return (
     <section ref={containerRef} className="relative h-[250vh]">
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
         <motion.div 
           className="relative w-full max-w-7xl h-full flex flex-col items-center justify-center px-6"
         >
-          {/* Floating Stars */}
-          {stars.map((star, i) => (
-            <motion.img
-              key={i}
-              src="https://pngimg.com/d/star_PNG76911.png"
-              alt="Star"
-              referrerPolicy="no-referrer"
-              style={{ 
-                top: star.top, 
-                left: star.left,
-                scale: starScale,
-                opacity: starOpacity
-              }}
-              className="absolute w-8 h-8 z-5 pointer-events-none brightness-150 contrast-125 blur-[0.5px] transform-gpu"
-            />
-          ))}
-
           {/* Big Text Background */}
           <motion.div 
             style={{ scale: textScale }}
