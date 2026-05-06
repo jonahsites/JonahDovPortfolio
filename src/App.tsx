@@ -963,6 +963,42 @@ const WebsitesPage = () => {
       url: "https://power-painting.vercel.app/",
       description: "A professional-grade web experience for commercial and residential painting services, focusing on craftsmanship and visual impact.",
       image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fpower-painting.vercel.app%2F?w=1200&h=800"
+    },
+    {
+      name: "DG Training",
+      url: "https://dg-training.vercel.app/",
+      description: "A high-performance athletic training platform designed to push boundaries and achieve peak physical condition.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fdg-training.vercel.app%2F?w=1200&h=800"
+    },
+    {
+      name: "Capital Exotics",
+      url: "https://capital-exotics.vercel.app/",
+      description: "Elite luxury car rental service featuring the world's most sought-after vehicles for an unforgettable driving experience.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fcapital-exotics.vercel.app%2F?w=1200&h=800"
+    },
+    {
+      name: "Switch Exotics",
+      url: "https://switchexotics.vercel.app/",
+      description: "Luxury automotive platform providing exclusive access to exotic vehicle swaps and premium rentals.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fswitchexotics.vercel.app%2F?w=1200&h=800"
+    },
+    {
+      name: "Rent My Life",
+      url: "https://rentmylife.vercel.app/",
+      description: "A unique lifestyle rental experience, offering access to high-end assets and curated life moments.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Frentmylife.vercel.app%2F?w=1200&h=800"
+    },
+    {
+      name: "Exotic Watches",
+      url: "https://exotic-watches.vercel.app/",
+      description: "A digital showcase for rare and high-end horology, connecting enthusiasts with extraordinary timepieces.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fexotic-watches.vercel.app%2F?w=1200&h=800"
+    },
+    {
+      name: "Kinetic LAC",
+      url: "https://kinetic-lac.vercel.app/",
+      description: "Modern fitness and movement facility web presence, emphasizing kinetic energy and athletic growth.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fkinetic-lac.vercel.app%2F?w=1200&h=800"
     }
   ];
 
@@ -997,7 +1033,7 @@ const WebsitesPage = () => {
         </div>
 
         <div className="space-y-64">
-          {websites.filter(s => ["REX Soccer", "Nines Rentals"].includes(s.name)).map((site, index) => (
+          {websites.filter(s => ["REX Soccer", "Nines Rentals", "DG Training", "Capital Exotics", "Switch Exotics", "Rent My Life", "Exotic Watches", "Kinetic LAC", "YOLO Boat"].includes(s.name)).map((site, index) => (
             <WebsiteCard key={index} site={site} index={index} />
           ))}
         </div>
