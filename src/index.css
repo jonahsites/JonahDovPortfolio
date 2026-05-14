@@ -19,11 +19,11 @@
 
 @layer utilities {
   .glass {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10;
+    @apply backdrop-blur-md bg-white/5 border border-white/10;
   }
 
   .liquid-glass {
-    @apply backdrop-blur-3xl bg-white/5 border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] relative overflow-hidden;
+    @apply backdrop-blur-xl bg-white/5 border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] relative overflow-hidden;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   }
 

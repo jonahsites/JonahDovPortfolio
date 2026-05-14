@@ -88,7 +88,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-[90] bg-black/95 backdrop-blur-2xl md:hidden flex items-center justify-center pt-24"
+            className="fixed inset-0 z-[90] bg-black/95 backdrop-blur-lg md:hidden flex items-center justify-center pt-24"
           >
             <div className="flex flex-col items-center gap-8">
               {navLinks.map((link) => (
@@ -328,7 +328,7 @@ const ProjectCard: React.FC<{ project: any; index: number }> = ({ project, index
         </motion.div>
 
         <div className={cn(
-          "relative md:absolute md:top-1/2 md:-translate-y-1/2 z-10 p-8 md:p-12 bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl max-w-md shadow-2xl mt-[-40px] md:mt-0 mx-4 md:mx-0",
+          "relative md:absolute md:top-1/2 md:-translate-y-1/2 z-10 p-8 md:p-12 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl max-w-md shadow-2xl mt-[-40px] md:mt-0 mx-4 md:mx-0",
           index % 2 === 0 ? "md:right-0 md:-right-10" : "md:left-0 md:-left-10"
         )}>
           <p className="text-[10px] font-black text-brand-blue uppercase tracking-[0.4em] mb-4">{project.category}</p>
@@ -372,6 +372,13 @@ const WorkSection = () => {
       description: "Creating compelling visual narratives across digital and print media, focusing on composition, typography, and color theory.",
       image: "https://lh3.googleusercontent.com/d/1ljHVC8mA3FYW9oNstJiPFSUh5aW55NCf",
       link: "/work/graphics"
+    },
+    {
+      title: "A Dove's Purpose",
+      category: "Community Advocacy",
+      description: "Leveraging design to empower local voices, non-profits, and cultural initiatives for positive social resonance.",
+      image: "/52901996075.png",
+      link: "/community"
     }
   ];
 
@@ -620,7 +627,13 @@ const WorkPage = () => {
         <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-20">
           <Link to="/work/websites" className="px-8 py-3 border border-white/10 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 font-mono text-[10px] uppercase tracking-widest">Websites</Link>
           <Link to="/work/logos" className="px-8 py-3 border border-white/10 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 font-mono text-[10px] uppercase tracking-widest">Logos</Link>
-          <Link to="/work/graphics" className="px-8 py-3 border border-brand-blue text-white bg-brand-blue/10 hover:bg-brand-blue transition-all duration-300 font-mono text-[10px] uppercase tracking-widest">Graphics</Link>
+          <Link to="/work/graphics" className="px-8 py-3 border border-white/10 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 font-mono text-[10px] uppercase tracking-widest">Graphics</Link>
+          <Link to="/community" className="px-8 py-3 border border-brand-blue text-white bg-brand-blue/10 hover:bg-brand-blue transition-all duration-300 font-mono text-[10px] uppercase tracking-widest italic group">
+            <span className="flex items-center gap-2">
+              A Dove's Purpose 
+              <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+            </span>
+          </Link>
         </div>
         
         <WorkSection />
@@ -836,7 +849,7 @@ const WebsiteCard = ({ site, index }: { site: any; index: number }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           
           {/* Floating Badge */}
-          <div className="absolute top-6 right-6 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full">
+          <div className="absolute top-6 right-6 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
             <p className="text-[10px] font-black text-white uppercase tracking-widest">0{index + 1}</p>
           </div>
         </div>
@@ -1007,16 +1020,16 @@ const WebsitesPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pt-40 pb-40 relative overflow-hidden"
+      className="pt-32 md:pt-40 pb-24 md:pb-40 relative overflow-hidden"
     >
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-blue/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-blue/5 rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-blue/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-blue/5 rounded-full blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="mb-40 text-center">
+        <div className="mb-20 md:mb-40 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1070,10 +1083,10 @@ const LogosPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pt-40 pb-40 relative overflow-hidden"
+      className="pt-32 md:pt-40 pb-24 md:pb-40 relative overflow-hidden"
     >
       <div className="container mx-auto px-6 relative z-10">
-        <div className="mb-40 text-center">
+        <div className="mb-20 md:mb-40 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1212,7 +1225,7 @@ const GraphicsPage = () => {
                 ease: [0.23, 1, 0.32, 1]
               }}
               className={cn(
-                "relative group cursor-pointer rounded-2xl overflow-hidden border border-white/5 bg-white/5 backdrop-blur-sm transition-all duration-500 hover:border-brand-blue/30 hover:shadow-[0_0_30px_rgba(0,102,255,0.15)]",
+                "relative group cursor-pointer rounded-2xl overflow-hidden border border-white/5 bg-white/5 backdrop-blur-[2px] transition-all duration-500 hover:border-brand-blue/30 hover:shadow-[0_0_30px_rgba(0,102,255,0.15)]",
                 isLarge ? "col-span-2 row-span-2" : 
                 isWide ? "col-span-2 row-span-1" : 
                 isTall ? "col-span-1 row-span-2" : 
@@ -1253,7 +1266,7 @@ const GraphicsPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-xl"
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-lg"
             onClick={() => setSelectedImage(null)}
           >
             <motion.div
@@ -1314,7 +1327,8 @@ const CommunitySection = () => {
             >
               <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-6">Social Impact</h2>
               <h3 className="text-4xl md:text-8xl font-display font-black text-white uppercase tracking-tighter mb-8 leading-[0.9]">
-                Design for <br /> <span className="text-brand-blue italic">Community</span>
+                A Dove's <br /> <span className="text-brand-blue italic">Purpose</span>
+                <span className="block text-brand-blue font-mono text-[0.15em] md:text-[0.12em] tracking-[0.5em] mt-2 uppercase opacity-60">Community</span>
               </h3>
               <p className="text-white/60 text-base md:text-xl font-medium tracking-wide leading-relaxed mb-12 max-w-2xl mx-auto lg:mx-0">
                 Beyond the screen, design has the power to unite and inspire. I partner with local organizations and social initiatives to craft visual stories that resonate within our community.
@@ -1352,7 +1366,17 @@ const CommunitySection = () => {
 };
 
 const CommunityPage = () => {
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+
   const socialProjects = [
+    {
+      title: "Letters Across the World",
+      category: "Social Advocacy / Youth Outreach",
+      description: "Letter templates for kids with parents overseas.",
+      longDescription: "Designed to bridge the emotional distance between military families, 'Letters Across the World' provides structured, creative letter templates for children with parents deployed overseas. My design process focused on accessibility and emotional expression—crafting posters and interactive letter formats that simplify complex emotions into visual prompts. This project facilitates regular, meaningful communication, which research shows can reduce emotional issues by 33% by mitigating loneliness and anxiety. As Vice President of my school’s Veteran’s Affairs Club, I leveraged my design foundations to create a toolkit that not only enhances literacy and creativity but also reminds military children that their voices matter across every ocean.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fcanva.link%2F0264il423sfnce6?w=1200&h=800",
+      canvaLink: "https://canva.link/0264il423sfnce6"
+    },
     {
       title: "Millburn 250th",
       category: "Municipal Branding / Volunteer",
@@ -1372,10 +1396,10 @@ const CommunityPage = () => {
       image: "https://files.catbox.moe/m5dird.png"
     },
     {
-       title: "Youth Outreach",
-       category: "Social Initiative / Volunteer",
-       description: "Creating engaging visual materials for youth-focused programs to foster participation and increase community visibility.",
-       image: "https://lh3.googleusercontent.com/d/1ljHVC8mA3FYW9oNstJiPFSUh5aW55NCf"
+      title: "Youth Outreach",
+      category: "Social Initiative / Volunteer",
+      description: "Creating engaging visual materials for youth-focused programs to foster participation and increase community visibility.",
+      image: "https://lh3.googleusercontent.com/d/1ljHVC8mA3FYW9oNstJiPFSUh5aW55NCf"
     }
   ];
 
@@ -1394,8 +1418,9 @@ const CommunityPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-6">Partnerships / Advocacy</h2>
-            <h1 className="text-5xl md:text-[12vw] font-display font-black tracking-tighter text-white uppercase mb-8 md:mb-12 leading-none md:leading-[0.85]">
-              Comm<span className="text-brand-blue italic">unity</span>
+            <h1 className="text-5xl md:text-[10vw] font-display font-black tracking-tighter text-white uppercase mb-8 md:mb-12 leading-none md:leading-[0.85]">
+              A Dove's <br className="md:hidden" /> Purpose
+              <span className="block text-brand-blue font-mono text-[0.15em] md:text-[0.1em] tracking-[0.6em] mt-4 italic uppercase">Community</span>
             </h1>
             <p className="text-white/40 text-lg md:text-xl max-w-3xl mx-auto font-medium tracking-wide leading-relaxed">
               Leveraging design to empower <span className="text-white">local voices, non-profits, and cultural initiatives.</span> Every project is a commitment to positive social resonance.
@@ -1411,16 +1436,19 @@ const CommunityPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.8 }}
-              className="group"
+              className="group cursor-pointer"
+              onClick={() => setSelectedProject(project)}
             >
-              <div className="relative aspect-video mb-8 md:mb-10 overflow-hidden rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
+              <div className="relative aspect-video mb-8 md:mb-10 overflow-hidden rounded-2xl border border-white/5 bg-white/5 backdrop-blur-[2px]">
                 <img 
                   src={project.image} 
                   alt={project.title}
                   className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-brand-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-brand-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center">
+                  <span className="text-white font-mono text-[10px] uppercase tracking-widest bg-black/60 px-4 py-2 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">View Story</span>
+                </div>
               </div>
               <h3 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-3 md:mb-4">{project.category}</h3>
               <h4 className="text-2xl md:text-4xl font-display font-black text-white uppercase tracking-tighter mb-4">{project.title}</h4>
@@ -1428,6 +1456,79 @@ const CommunityPage = () => {
             </motion.div>
           ))}
         </div>
+
+        <AnimatePresence>
+          {selectedProject && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-lg"
+              onClick={() => setSelectedProject(null)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="relative w-full max-w-5xl bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden max-h-[90vh] flex flex-col md:flex-row"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Close Button */}
+                <button 
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-4 right-4 z-50 p-2 bg-black/50 hover:bg-white/10 text-white rounded-full backdrop-blur-md transition-colors"
+                >
+                  <X size={20} />
+                </button>
+
+                {/* Content */}
+                <div className="w-full md:w-1/2 aspect-square md:aspect-auto overflow-hidden bg-zinc-800">
+                  <img 
+                    src={selectedProject.image} 
+                    alt={selectedProject.title}
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+
+                <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto">
+                  <p className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.4em] mb-6">{selectedProject.category}</p>
+                  <h2 className="text-4xl md:text-5xl font-display font-black text-white uppercase tracking-tighter mb-8 leading-none">{selectedProject.title}</h2>
+                  
+                  <div className="space-y-6 text-white/60 text-base md:text-lg leading-relaxed">
+                    {selectedProject.longDescription ? (
+                      <p>{selectedProject.longDescription}</p>
+                    ) : (
+                      <p>{selectedProject.description}</p>
+                    )}
+                  </div>
+
+                  {selectedProject.canvaLink && (
+                    <div className="mt-10">
+                      <a 
+                        href={selectedProject.canvaLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 text-white font-mono text-[10px] uppercase tracking-widest border-b border-brand-blue/50 pb-1 hover:text-brand-blue hover:border-brand-blue transition-all"
+                      >
+                        View Project on Canva <ArrowUpRight size={14} />
+                      </a>
+                    </div>
+                  )}
+
+                  <div className="mt-12 pt-8 border-t border-white/5">
+                    <p className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-4">Sharing the Impact</p>
+                    <div className="flex gap-4">
+                      <Instagram size={18} className="text-white/40 hover:text-white cursor-pointer transition-colors" />
+                      <Twitter size={18} className="text-white/40 hover:text-white cursor-pointer transition-colors" />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="mt-40 md:mt-64 text-center">
           <Link to="/" className="inline-flex items-center gap-6 px-10 md:px-12 py-5 md:py-6 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 group">
