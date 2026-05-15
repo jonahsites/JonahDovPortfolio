@@ -1370,6 +1370,13 @@ const CommunityPage = () => {
 
   const socialProjects = [
     {
+      title: "Locked In",
+      category: "Academic Support / Student-Led",
+      description: "A collaborative platform for high school students to volunteer and share study resources.",
+      longDescription: "Locked In is a student-led initiative designed to foster academic excellence through peer-to-peer support. I led the creative direction for this project, designing a focused and professional visual identity that resonates with high schoolers. The logo and website were crafted to provide a distraction-free space where students can volunteer, organize group discussions, and build a digital library of community-shared study resources. The design emphasizes academic discipline while maintaining an approachable, collaborative feel.",
+      image: "https://lh3.googleusercontent.com/d/1G836GHJWlGGhNpP9zcEq-6TBpKBnWmcf"
+    },
+    {
       title: "Letters Across the World",
       category: "Social Advocacy / Youth Outreach",
       description: "Letter templates for kids with parents overseas.",
@@ -1378,22 +1385,29 @@ const CommunityPage = () => {
       canvaLink: "https://canva.link/0264il423sfnce6"
     },
     {
+      title: "GRACE",
+      category: "Volunteer Center / Advocacy",
+      description: "Creating engaging visual identities and promotional graphics for a dedicated community volunteer center.",
+      longDescription: "GRACE is a pillar of community support, and my work with them focused on amplifying their mission through high-impact visual design. I developed a series of engaging graphics and branding elements designed to inspire volunteerism and streamline their digital outreach. By creating a cohesive visual language, we were able to better communicate the center's impact and connect more effectively with those seeking to serve their community.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWXQmunKlMVqZz9dIiy4RdidFrt3qgiQEV_Q&s"
+    },
+    {
       title: "Millburn 250th",
       category: "Municipal Branding / Volunteer",
       description: "An award-winning visual identity for Millburn Township. A blend of history and modernity designed for the community's milestone celebration.",
-      image: "/52901996075.png"
+      image: "https://lh3.googleusercontent.com/d/1ZM1Wt1dVT9g7Eerfi_tWsmSWj0trf97c"
     },
     {
       title: "Influencer Brand",
       category: "Personal Brand Identity / Client",
       description: "Crafting a unique visual narrative for a high-profile influencer, centering on authenticity and aesthetic digital presence.",
-      image: "/MomLogo.png"
+      image: "https://lh3.googleusercontent.com/d/1qjjPNRev_kALbbOTjJm9Q72sJYuCTCKj"
     },
     {
       title: "Local Sports Training",
       category: "Community Business / Client",
       description: "Developing robust visual systems for local athletic programs, focusing on energy, performance, and professional appeal.",
-      image: "https://files.catbox.moe/m5dird.png"
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Frex-soccer-training.vercel.app%2F?w=1200&h=800"
     },
     {
       title: "Youth Outreach",
