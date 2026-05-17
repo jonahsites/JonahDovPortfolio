@@ -11,25 +11,30 @@ async function startServer() {
   const PORT = 3000;
 
   // Vite middleware for development
+  let vite: any;
   if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
+    vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
   } else {
     // Production: serve static files from dist
-    const distPath = path.join(process.cwd(), 'dist');
+    const distPath = path.dirname(fileURLToPath(import.meta.url));
     app.use(express.static(distPath));
     
-    // SPA fallback: handle all routes by serving index.html
+    // SPA fallback: handle all non-file routes by serving index.html
     app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+      if (req.method === 'GET' && !req.path.includes('.')) {
+        res.sendFile(path.join(distPath, 'index.html'));
+      } else {
+        res.status(404).send('Not Found');
+      }
     });
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT} (env: ${process.env.NODE_ENV || 'development'})`);
   });
 }
 

@@ -10,6 +10,9 @@ import { StaggerText } from './components/ui/stagger-text';
 import { Button } from './components/ui/button';
 import { ParallaxComponent } from './components/ui/parallax-scrolling';
 
+import { BGPattern } from './components/ui/bg-pattern';
+import { ContactPage } from './components/ContactPage';
+
 // --- Scroll To Top Component ---
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -30,7 +33,7 @@ const Navbar = () => {
     { name: 'Home', path: '/', desktop: true },
     { name: 'About', path: '/about', desktop: true },
     { name: 'Work', path: '/work', desktop: true },
-    { name: 'Contact', path: isHomePage ? '#contact' : '/#contact', desktop: true, isHash: true },
+    { name: 'Contact', path: '/contact', desktop: true },
   ];
 
   return (
@@ -62,11 +65,7 @@ const Navbar = () => {
             <Link to="/work" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Work</Link>
           </div>
           <div className="hidden md:flex flex-1 justify-center">
-            {navLinks[3].isHash && isHomePage ? (
-              <a href="#contact" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Contact</a>
-            ) : (
-              <Link to="/#contact" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Contact</Link>
-            )}
+            <Link to="/contact" className="px-4 py-2 text-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">Contact</Link>
           </div>
 
           {/* Mobile Toggle */}
@@ -92,25 +91,14 @@ const Navbar = () => {
           >
             <div className="flex flex-col items-center gap-8">
               {navLinks.map((link) => (
-                link.isHash && isHomePage ? (
-                  <a 
-                    key={link.name}
-                    href={link.path} 
-                    onClick={() => setIsOpen(false)}
-                    className="text-4xl font-display font-black text-white uppercase tracking-tighter hover:text-brand-blue transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                ) : (
-                  <Link 
-                    key={link.name}
-                    to={link.path} 
-                    onClick={() => setIsOpen(false)}
-                    className="text-4xl font-display font-black text-white uppercase tracking-tighter hover:text-brand-blue transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                )
+                <Link 
+                  key={link.name}
+                  to={link.path} 
+                  onClick={() => setIsOpen(false)}
+                  className="text-4xl font-display font-black text-white uppercase tracking-tighter hover:text-brand-blue transition-colors"
+                >
+                  {link.name}
+                </Link>
               ))}
               <div className="mt-8 flex gap-6">
                 <a href="https://www.instagram.com/graphics_by_jd/" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full border border-white/10 text-white hover:bg-brand-blue hover:border-brand-blue transition-all">
@@ -271,9 +259,9 @@ const Hero = () => {
                 <p className="text-white/80 text-[10px] md:text-xs leading-relaxed mb-8 font-medium tracking-wide">
                   Merging design thinking with positive impact to create digital experiences that don't just look great — they drive collective change.
                 </p>
-                <button className="px-10 py-4 border border-white text-white font-mono text-[10px] uppercase tracking-[0.3em] flex items-center gap-4 mx-auto md:ml-auto hover:bg-white hover:text-black transition-all duration-500 group">
+                <Link to="/contact" className="px-10 py-4 border border-white text-white font-mono text-[10px] uppercase tracking-[0.3em] flex items-center gap-4 mx-auto md:ml-auto hover:bg-white hover:text-black transition-all duration-500 group">
                   Let's Talk <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </button>
+                </Link>
               </div>
             </div>
           </motion.div>
@@ -340,9 +328,9 @@ const ProjectCard: React.FC<{ project: any; index: number }> = ({ project, index
               <ButtonContent />
             </Link>
           ) : (
-            <button className="inline-flex items-center gap-4 px-8 py-4 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 group">
+            <Link to="/contact" className="inline-flex items-center gap-4 px-8 py-4 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 group">
               <ButtonContent />
-            </button>
+            </Link>
           )}
         </div>
       </div>
@@ -463,9 +451,9 @@ const ContactSection = () => {
             <p className="text-xl md:text-4xl font-light">+1 (973) 275-7624</p>
           </div>
 
-          <button className="px-10 md:px-12 py-5 md:py-6 border border-white text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500 flex items-center gap-4 mx-auto group">
+          <Link to="/contact" className="px-10 md:px-12 py-5 md:py-6 border border-white text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500 flex items-center gap-4 mx-auto group">
             Start a Project <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </button>
+          </Link>
         </motion.div>
 
         <div className="mt-20 md:mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
@@ -566,7 +554,7 @@ const AboutPage = () => {
               Creating digital identities that resonate with the next generation of users.
             </p>
             <Link to="/work/websites">
-              <Button className="bg-brand-blue hover:bg-brand-blue/80 text-white font-mono text-[10px] uppercase tracking-[0.3em] px-12 py-6 rounded-none border border-white/10" size="lg">
+              <Button className="bg-brand-blue hover:bg-brand-blue/80 text-white font-mono text-[10px] uppercase tracking-[0.3em] px-12 py-6 rounded-md border border-white/10" size="lg">
                 Explore the Archive
               </Button>
             </Link>
@@ -595,9 +583,13 @@ const AboutPage = () => {
           </div>
         </div>
 
-        <div className="text-center">
-          <Link to="/" className="inline-flex items-center gap-4 px-8 py-4 border border-white/10 text-white/60 hover:text-white hover:bg-white/5 transition-all duration-300 font-mono text-[10px] uppercase tracking-[0.4em]">
+        <div className="text-center mt-12 flex flex-col md:flex-row justify-center gap-4">
+          <Link to="/" className="inline-flex items-center justify-center gap-4 px-8 py-4 border border-white/10 text-white/60 hover:text-white hover:bg-white/5 transition-all duration-300 font-mono text-[10px] uppercase tracking-[0.4em]">
             <ArrowLeft size={16} /> Back to Home
+          </Link>
+          <Link to="/contact" className="inline-flex items-center justify-center gap-4 px-10 py-4 bg-brand-blue text-white hover:bg-white hover:text-black transition-all duration-500 group">
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em]">Let's Talk</span>
+            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </Link>
         </div>
       </div>
@@ -744,7 +736,7 @@ const FoldingSection = () => {
 
   const words = [
     { text: "WEBSITES", range: [0.1, 0.4] as [number, number], link: "/work/websites" },
-    { text: "LOGOS", range: [0.45, 0.7] as [number, number] },
+    { text: "LOGOS", range: [0.45, 0.7] as [number, number], link: "/work/logos" },
     { text: "GRAPHICS", range: [0.75, 0.98] as [number, number], link: "/work/graphics" }
   ];
 
@@ -1301,10 +1293,14 @@ const GraphicsPage = () => {
       </AnimatePresence>
 
       {/* Footer Navigation */}
-      <div className="max-w-7xl mx-auto mt-32 text-center">
-        <Link to="/work" className="inline-flex items-center gap-6 px-12 py-6 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 group">
+      <div className="max-w-7xl mx-auto mt-32 flex flex-col md:flex-row items-center justify-center gap-8 px-6">
+        <Link to="/work" className="inline-flex items-center gap-6 px-12 py-6 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 group min-w-[280px] justify-center">
           <ArrowLeft size={18} className="group-hover:-translate-x-2 transition-transform" /> 
           <span className="font-mono text-[10px] uppercase tracking-[0.4em]">Back to Portfolio</span>
+        </Link>
+        <Link to="/patterns" className="inline-flex items-center gap-6 px-12 py-6 bg-brand-blue/10 border border-brand-blue/30 text-white hover:bg-brand-blue transition-all duration-500 group min-w-[280px] justify-center backdrop-blur-sm">
+          <span className="font-mono text-[10px] uppercase tracking-[0.4em]">Design Lab</span>
+          <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" /> 
         </Link>
       </div>
     </motion.div>
@@ -1373,7 +1369,7 @@ const CommunityPage = () => {
       title: "Locked In",
       category: "Academic Support / Student-Led",
       description: "A collaborative platform for high school students to volunteer and share study resources.",
-      longDescription: "Locked In is a student-led initiative designed to foster academic excellence through peer-to-peer support. I led the creative direction for this project, designing a focused and professional visual identity that resonates with high schoolers. The logo and website were crafted to provide a distraction-free space where students can volunteer, organize group discussions, and build a digital library of community-shared study resources. The design emphasizes academic discipline while maintaining an approachable, collaborative feel.",
+      longDescription: "Locked In is a student-led initiative designed to foster academic excellence through peer-to-peer support. It provides a space where high school students can volunteer their time to help peers with coursework and studying, while also serving as a central hub for sharing helpful study resources and hosting group discussions. I designed the logo and website to reflect a modern, focused, and academic atmosphere, ensuring the platform remains both professional and approachable for student users.",
       image: "https://lh3.googleusercontent.com/d/1G836GHJWlGGhNpP9zcEq-6TBpKBnWmcf"
     },
     {
@@ -1576,6 +1572,58 @@ const HomePage = () => {
   );
 };
 
+const PatternDemoPage = () => {
+	return (
+		<motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="pt-40 pb-20 bg-black min-h-screen"
+    >
+      <div className="mx-auto max-w-4xl space-y-12 p-8 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.5em] mb-4">Design Lab</h2>
+          <h1 className="text-4xl md:text-6xl font-display font-black text-white uppercase tracking-tighter leading-none mb-6">
+            Background <span className="text-brand-blue italic">Systems</span>
+          </h1>
+          <p className="text-white/40 max-w-xl mx-auto text-sm font-medium">
+            Exploring geometric patterns and procedural textures that form the foundation of our digital architecture.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="relative flex aspect-video flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 overflow-hidden group">
+            <BGPattern variant="grid" mask="fade-edges" fill="rgba(0,102,255,0.2)" />
+            <h2 className="text-2xl font-display font-black text-white uppercase tracking-tighter mb-2">Grid Structure</h2>
+            <p className="text-white/40 font-mono text-[8px] uppercase tracking-widest">Variant: Grid | Mask: Fade Edges</p>
+          </div>
+          <div className="relative flex aspect-video flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 overflow-hidden group">
+            <BGPattern variant="dots" mask="fade-center" fill="rgba(0,102,255,0.3)" />
+            <h2 className="text-2xl font-display font-black text-white uppercase tracking-tighter mb-2">Dot Matrix</h2>
+            <p className="text-white/40 font-mono text-[8px] uppercase tracking-widest">Variant: Dots | Mask: Fade Center</p>
+          </div>
+          <div className="relative flex aspect-video flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 overflow-hidden group">
+            <BGPattern variant="diagonal-stripes" mask="fade-y" fill="rgba(255,255,255,0.05)" />
+            <h2 className="text-2xl font-display font-black text-white uppercase tracking-tighter mb-2">Linear Flow</h2>
+            <p className="text-white/40 font-mono text-[8px] uppercase tracking-widest">Variant: Diagonal | Mask: Fade Y</p>
+          </div>
+          <div className="relative flex aspect-video flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 overflow-hidden group">
+            <BGPattern variant="checkerboard" mask="fade-top" fill="rgba(0,102,255,0.1)" />
+            <h2 className="text-2xl font-display font-black text-white uppercase tracking-tighter mb-2">Spatial Tiles</h2>
+            <p className="text-white/40 font-mono text-[8px] uppercase tracking-widest">Variant: Checkerboard | Mask: Fade Top</p>
+          </div>
+        </div>
+
+        <div className="text-center mt-20">
+          <Link to="/work" className="inline-flex items-center gap-4 px-8 py-4 border border-white/10 text-white/60 hover:text-white hover:bg-white/5 transition-all duration-300 font-mono text-[10px] uppercase tracking-[0.4em]">
+            <ArrowLeft size={16} /> Back to Portfolio
+          </Link>
+        </div>
+      </div>
+    </motion.div>
+	);
+};
+
 // --- Main App ---
 
 export default function App() {
@@ -1602,11 +1650,17 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
       <main className="bg-black relative min-h-screen">
-        {/* Global Space Gradient Background */}
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_#1e3a8a_0%,_transparent_50%)] opacity-60" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,_#0f172a_0%,_transparent_50%)] opacity-40" />
-          <div className="absolute inset-0 bg-black/80" />
+        {/* Global Pattern Background */}
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+          <BGPattern 
+            variant="grid" 
+            mask="none" 
+            fill="rgba(0, 102, 255, 0.05)" 
+            size={40}
+            className="opacity-40"
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(30,58,138,0.2)_0%,_transparent_50%)]" />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
         <div className="relative z-10">
@@ -1620,6 +1674,8 @@ export default function App() {
               <Route path="/work/graphics" element={<GraphicsPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/community" element={<CommunityPage />} />
+              <Route path="/patterns" element={<PatternDemoPage />} />
+              <Route path="/contact" element={<ContactPage />} />
             </Routes>
           </AnimatePresence>
         </div>
