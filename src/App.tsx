@@ -271,6 +271,83 @@ const Hero = () => {
   );
 };
 
+const PressFeatured = () => {
+  return (
+    <section className="py-16 md:py-24 bg-black border-y border-white/5 relative overflow-hidden">
+      {/* Background glow effects */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[300px] h-[300px] bg-brand-blue/5 rounded-full blur-[100px] pointer-events-none" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Text content - spans 7 cols */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="inline-flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-brand-blue animate-pulse" />
+              <span className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.4em]">Featured Press Release</span>
+            </div>
+            
+            <h2 className="text-3xl md:text-5xl font-display font-black text-white uppercase tracking-tighter leading-none">
+              Nationally Covered: <br />
+              <span className="text-white/40">A Dove's Purpose Launched to Elevate Nonprofit Brands</span>
+            </h2>
+            
+            <p className="text-white/60 text-sm md:text-base leading-relaxed max-w-xl">
+              Jonah Dovdavany's new initiative, <span className="text-white">A Dove's Purpose</span>, has been featured across major national syndicates. The launch was picked up across over 175 prominent media outlets, highlighting his creative vision and custom engineering dedicated to digital advocacy.
+            </p>
+            
+            <div className="pt-4 flex flex-wrap gap-4">
+              <a 
+                href="https://apnews.com/press-release/ein-presswire-newsmatics/self-taught-designer-jonah-dovdavany-launches-a-doves-purpose-to-help-nonprofit-brands-elevate-their-online-presence-16713ce8521b987efd67ce568337dc40"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-6 py-3.5 bg-brand-blue hover:bg-white text-white hover:text-black font-mono text-[10px] uppercase tracking-wider transition-all duration-300 rounded-xl"
+              >
+                Read On AP News <ArrowUpRight size={14} />
+              </a>
+              <Link
+                to="/community"
+                className="inline-flex items-center gap-3 px-6 py-3.5 border border-white/10 hover:border-white/20 hover:bg-white/5 text-white/85 hover:text-white font-mono text-[10px] uppercase tracking-wider transition-all duration-300 rounded-xl"
+              >
+                View Community Work <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+          
+          {/* Syndication sidebar / logo grid - spans 5 cols */}
+          <div className="lg:col-span-5 bg-white/[0.02] border border-white/5 rounded-3xl p-8 relative overflow-hidden backdrop-blur-md">
+            <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] block mb-6">Syndicated Outlets</span>
+            
+            <div className="space-y-4">
+              <div className="flex justify-between items-center border-b border-white/5 pb-2 text-[11px]">
+                <span className="font-sans font-black text-white tracking-tighter text-xs">AP NEWS</span>
+                <span className="text-[9px] font-mono text-brand-blue uppercase tracking-widest bg-brand-blue/10 px-2 py-0.5 rounded">Featured</span>
+              </div>
+              <div className="flex justify-between items-center border-b border-white/5 pb-2 text-[11px]">
+                <span className="font-serif font-bold italic text-white tracking-widest text-xs">YAHOO!</span>
+                <span className="text-white/40 font-mono text-[9px]">Global</span>
+              </div>
+              <div className="flex justify-between items-center border-b border-white/5 pb-2 text-[11px]">
+                <span className="font-mono font-medium text-white tracking-tight text-xs">EIN PRESSWIRE</span>
+                <span className="text-white/40 font-mono text-[9px]">Business</span>
+              </div>
+              <div className="flex justify-between items-center border-b border-white/5 pb-2 text-[11px]">
+                <span className="font-sans font-medium text-white tracking-widest text-xs">GOOGLE NEWS</span>
+                <span className="text-white/40 font-mono text-[9px]">Aggregator</span>
+              </div>
+              <div className="flex justify-between items-center text-[11px]">
+                <span className="text-brand-blue font-bold tracking-wider uppercase text-[10px]">175+ SYNDICATES</span>
+                <span className="text-brand-blue/60 font-mono text-[9px]">Worldwide</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const ProjectCard: React.FC<{ project: any; index: number }> = ({ project, index }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -1438,6 +1515,79 @@ const CommunityPage = () => {
           </motion.div>
         </div>
 
+        {/* Press Release Feature Block */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-24 md:mb-36 max-w-5xl mx-auto bg-white/[0.02] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden backdrop-blur-xl"
+        >
+          {/* subtle background glow */}
+          <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="relative z-10 flex flex-col lg:flex-row gap-10 items-stretch">
+            <div className="flex-1 flex flex-col justify-between">
+              <div>
+                <span className="px-3 py-1 bg-brand-blue/20 text-brand-blue font-mono text-[9px] uppercase tracking-[0.2em] rounded-full inline-block mb-6">
+                  Featured Press Release
+                </span>
+                <h2 className="text-2xl md:text-4xl font-display font-black text-white uppercase tracking-tight mb-4 leading-tight">
+                  Self-Taught Designer Jonah Dovdavany Launches A Dove's Purpose to Help Nonprofit Brands Elevate Their Online Presence
+                </h2>
+                <p className="text-white/60 text-sm md:text-base leading-relaxed mb-8">
+                  A Dove’s Purpose has been featured across major news platforms for its mission-driven visual work. The syndication was picked up internationally by over 175+ trusted media outlets, including AP News, Yahoo, and regional press, celebrating Jonah’s commitment to driving positive community impact through design.
+                </p>
+              </div>
+              
+              <div className="flex flex-wrap gap-4 text-xs font-mono">
+                <a 
+                  href="https://apnews.com/press-release/ein-presswire-newsmatics/self-taught-designer-jonah-dovdavany-launches-a-doves-purpose-to-help-nonprofit-brands-elevate-their-online-presence-16713ce8521b987efd67ce568337dc40"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-4 bg-brand-blue hover:bg-white text-white hover:text-black font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 rounded-xl"
+                >
+                  Read on AP News <ArrowUpRight size={14} />
+                </a>
+                <a 
+                  href="https://www.einpresswire.com/article/912099322/self-taught-designer-jonah-dovdavany-launches-a-dove-s-purpose-to-help-nonprofit-brands-elevate-their-online-presence"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-4 border border-white/10 text-white/90 hover:bg-white/5 hover:border-white/20 font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 rounded-xl"
+                >
+                  Read on EIN Presswire <ArrowUpRight size={14} />
+                </a>
+              </div>
+            </div>
+            
+            <div className="w-full lg:w-80 p-8 bg-black/40 border border-white/5 rounded-2xl flex flex-col justify-center">
+              <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] block mb-6">Major Syndication Pickups</span>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center border-b border-white/5 pb-2 text-[11px]">
+                  <span className="font-sans font-black text-white tracking-tighter text-xs">AP NEWS</span>
+                  <span className="text-white/40 font-mono text-[9px]">National</span>
+                </div>
+                <div className="flex justify-between items-center border-b border-white/5 pb-2 text-[11px]">
+                  <span className="font-serif font-bold italic text-white tracking-widest text-xs">YAHOO!</span>
+                  <span className="text-white/40 font-mono text-[9px]">Global</span>
+                </div>
+                <div className="flex justify-between items-center border-b border-white/5 pb-2 text-[11px]">
+                  <span className="font-mono font-medium text-white tracking-tight text-xs">EIN PRESSWIRE</span>
+                  <span className="text-white/40 font-mono text-[9px]">Business</span>
+                </div>
+                <div className="flex justify-between items-center border-b border-white/5 pb-2 text-[11px]">
+                  <span className="font-sans font-medium text-white tracking-widest text-xs">GOOGLE NEWS</span>
+                  <span className="text-white/40 font-mono text-[9px]">Aggregator</span>
+                </div>
+                <div className="flex justify-between items-center text-[11px]">
+                  <span className="text-brand-blue font-bold tracking-wider uppercase text-[10px]">175+ SYNDICATES</span>
+                  <span className="text-brand-blue/60 font-mono text-[9px]">Worldwide</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {socialProjects.map((project, index) => (
             <motion.div 
@@ -1559,6 +1709,7 @@ const HomePage = () => {
       exit={{ opacity: 0 }}
     >
       <Hero />
+      <PressFeatured />
       <CommunitySection />
       <ParallaxComponent />
       <AboutSection />
