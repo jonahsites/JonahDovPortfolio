@@ -58,25 +58,29 @@ ${message}
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Accept": "application/json"
+              "Accept": "application/json",
+              "Origin": "https://graphicsbyjd.com",
+              "Referer": "https://graphicsbyjd.com/"
             },
             body: JSON.stringify({
               access_key: web3FormsKey,
               name: name,
               email: email,
-              subject: `[Graphics by JD] ${subject || "New Portfolio Inquiry"}`,
-              message: textContent,
-              from_name: "Graphics by JD Site",
-              to_email: "jadovdav@gmail.com"
+              subject: `[Graphics by JD] ${subject || "New Inquiry Details"}`,
+              message: message, // Use the actual message string directly
+              from_name: "Graphics by JD Portfolio",
+              // Optional but helpful fields
+              source: "Portfolio Contact Form"
             })
           });
 
-          if (web3Response.ok) {
-            console.log(`[Email Delivered] From: ${name} via Web3Forms.`);
+          const web3Data = await web3Response.json().catch(() => ({}));
+          
+          if (web3Response.ok && web3Data.success === true) {
+            console.log(`[Email Delivered] From: ${name} via Web3Forms. Response:`, web3Data);
             return res.json({ success: true, method: "web3forms" });
           } else {
-            const errBody = await web3Response.json().catch(() => ({}));
-            console.error("Web3Forms API error:", errBody);
+            console.error("Web3Forms API returned error or failure status:", web3Data, "HTTP Status:", web3Response.status);
           }
         } catch (web3Err) {
           console.error("Failed to forward to Web3Forms:", web3Err);

@@ -52,7 +52,7 @@ export function ParallaxItem({
 
   return (
     <motion.div
-      className={className}
+      className={cn('relative', className)}
       ref={ref}
       style={{ transform, opacity, ...style }}
       {...props}
