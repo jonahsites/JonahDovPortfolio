@@ -1081,6 +1081,12 @@ const WebsitesPage = () => {
       url: "https://kinetic-lac.vercel.app/",
       description: "Modern fitness and movement facility web presence, emphasizing kinetic energy and athletic growth.",
       image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fkinetic-lac.vercel.app%2F?w=1200&h=800"
+    },
+    {
+      name: "Project 201",
+      url: "https://project201.org",
+      description: "A professional statewide youth development platform combining speed-agility athletic training with mental health huddles and routine accountability tracking throughout NJ.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fproject201.org?w=1200&h=800"
     }
   ];
 
@@ -1115,7 +1121,7 @@ const WebsitesPage = () => {
         </div>
 
         <div className="space-y-64">
-          {websites.filter(s => ["REX Soccer", "Nines Rentals", "DG Training", "Capital Exotics", "Switch Exotics", "Rent My Life", "Exotic Watches", "Kinetic LAC", "YOLO Boat"].includes(s.name)).map((site, index) => (
+          {websites.filter(s => ["REX Soccer", "Nines Rentals", "DG Training", "Capital Exotics", "Switch Exotics", "Rent My Life", "Exotic Watches", "Kinetic LAC", "YOLO Boat", "Project 201"].includes(s.name)).map((site, index) => (
             <WebsiteCard key={index} site={site} index={index} />
           ))}
         </div>
@@ -1487,6 +1493,14 @@ const CommunityPage = () => {
       category: "Social Initiative / Volunteer",
       description: "Creating engaging visual materials for youth-focused programs to foster participation and increase community visibility.",
       image: "https://lh3.googleusercontent.com/d/1ljHVC8mA3FYW9oNstJiPFSUh5aW55NCf"
+    },
+    {
+      title: "Project 201",
+      category: "Youth Mentorship / Athletic Advocacy",
+      description: "Custom digital advocate platform and high-conversion referral portals designed for New Jersey's premier sports-counseling organization.",
+      longDescription: "Project 201 is a statewide professional youth mentorship and development organization that integrates intensive athletic development with robust mental health support systems. Operating across five major branches—201 Sports, 201 Boxing, Mentorship Circle, School Programs, and Summer Camps—the organization uses structured daily tracking coordinates to enforce student accountability, performance goals, and parent-student relationship health. I architected and custom-engineered their digital advocacy platform at project201.org to translate this real-world impact transparently. The build elevates key NJ tracking metrics (over 250 youth mentored, a 98% behavior progress rate, and 1,500+ athletic training hours), implements streamlined parent support and referral enrollment flows, and showcases their USA Boxing and elite speed performance speed preps.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fproject201.org?w=1200&h=800",
+      url: "https://project201.org"
     }
   ];
 
@@ -1673,6 +1687,19 @@ const CommunityPage = () => {
                         className="inline-flex items-center gap-3 text-white font-mono text-[10px] uppercase tracking-widest border-b border-brand-blue/50 pb-1 hover:text-brand-blue hover:border-brand-blue transition-all"
                       >
                         View Project on Canva <ArrowUpRight size={14} />
+                      </a>
+                    </div>
+                  )}
+
+                  {selectedProject.url && (
+                    <div className="mt-10">
+                      <a 
+                        href={selectedProject.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 text-white font-mono text-[10px] uppercase tracking-widest border-b border-brand-blue/50 pb-1 hover:text-brand-blue hover:border-brand-blue transition-all"
+                      >
+                        Visit Live Website <ArrowUpRight size={14} />
                       </a>
                     </div>
                   )}
