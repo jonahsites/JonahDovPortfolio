@@ -1449,11 +1449,32 @@ const CommunityPage = () => {
 
   const socialProjects = [
     {
-      title: "Locked In",
-      category: "Academic Support / Student-Led",
-      description: "A collaborative platform for high school students to volunteer and share study resources.",
-      longDescription: "Locked In is a student-led initiative designed to foster academic excellence through peer-to-peer support. It provides a space where high school students can volunteer their time to help peers with coursework and studying, while also serving as a central hub for sharing helpful study resources and hosting group discussions. I designed the logo and website to reflect a modern, focused, and academic atmosphere, ensuring the platform remains both professional and approachable for student users.",
-      image: "https://lh3.googleusercontent.com/d/1G836GHJWlGGhNpP9zcEq-6TBpKBnWmcf"
+      title: "Project 201",
+      category: "Youth Mentorship / Athletic Advocacy",
+      description: "Custom digital advocate platform and high-conversion referral portals designed for New Jersey's premier sports-counseling organization.",
+      longDescription: "Project 201 is a statewide professional youth mentorship and development organization that integrates intensive athletic development with robust mental health support systems. Operating across five major branches—201 Sports, 201 Boxing, Mentorship Circle, School Programs, and Summer Camps—the organization uses structured daily tracking coordinates to enforce student accountability, performance goals, and parent-student relationship health. I architected and custom-engineered their digital advocacy platform at project201.org to translate this real-world impact transparently. The build elevates key NJ tracking metrics (over 250 youth mentored, a 98% behavior progress rate, and 1,500+ athletic training hours), implements streamlined parent support and referral enrollment flows, and showcases their USA Boxing and elite speed performance speed preps.",
+      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fproject201.org?w=1200&h=800",
+      url: "https://project201.org"
+    },
+    {
+      title: "GRACE",
+      category: "Volunteer Center / Advocacy",
+      description: "Creating engaging visual identities and promotional graphics for a dedicated community volunteer center.",
+      longDescription: "GRACE is a pillar of community support, and my work with them focused on amplifying their mission through high-impact visual design. I developed a series of engaging graphics and branding elements designed to inspire volunteerism and streamline their digital outreach. By creating a cohesive visual language, we were able to better communicate the center's impact and connect more effectively with those seeking to serve their community.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWXQmunKlMVqZz9dIiy4RdidFrt3qgiQEV_Q&s"
+    },
+    {
+      title: "Town Mural Design",
+      category: "Civic Art / Community Advocacy",
+      description: "Representing my welcoming Temple community in a permanent, large-scale mural design for the town.",
+      longDescription: "Attending my Temple for a long time has made it a foundational part of who I am—it has become an incredibly welcoming community that I am deeply proud to be involved with. I was lucky enough to be chosen to represent my Temple by creating the core artwork and design for a permanent commemorative mural for the town. This creative initiative transforms our Temple's values and connected community spirit into a soaring visual landmark, bridging student pride with municipal civic engagement to celebrate unity, local history, and youth leadership.",
+      image: "https://lh3.googleusercontent.com/d/1MWATUxZsaMIkaPeF0gup6KXmaxnAlYvd"
+    },
+    {
+      title: "Millburn 250th",
+      category: "Municipal Branding / Volunteer",
+      description: "An award-winning visual identity for Millburn Township. A blend of history and modernity designed for the community's milestone celebration.",
+      image: "https://lh3.googleusercontent.com/d/1ZM1Wt1dVT9g7Eerfi_tWsmSWj0trf97c"
     },
     {
       title: "Letters Across the World",
@@ -1464,17 +1485,17 @@ const CommunityPage = () => {
       canvaLink: "https://canva.link/0264il423sfnce6"
     },
     {
-      title: "GRACE",
-      category: "Volunteer Center / Advocacy",
-      description: "Creating engaging visual identities and promotional graphics for a dedicated community volunteer center.",
-      longDescription: "GRACE is a pillar of community support, and my work with them focused on amplifying their mission through high-impact visual design. I developed a series of engaging graphics and branding elements designed to inspire volunteerism and streamline their digital outreach. By creating a cohesive visual language, we were able to better communicate the center's impact and connect more effectively with those seeking to serve their community.",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWXQmunKlMVqZz9dIiy4RdidFrt3qgiQEV_Q&s"
+      title: "Locked In",
+      category: "Academic Support / Student-Led",
+      description: "A collaborative platform for high school students to volunteer and share study resources.",
+      longDescription: "Locked In is a student-led initiative designed to foster academic excellence through peer-to-peer support. It provides a space where high school students can volunteer their time to help peers with coursework and studying, while also serving as a central hub for sharing helpful study resources and hosting group discussions. I designed the logo and website to reflect a modern, focused, and academic atmosphere, ensuring the platform remains both professional and approachable for student users.",
+      image: "https://lh3.googleusercontent.com/d/1G836GHJWlGGhNpP9zcEq-6TBpKBnWmcf"
     },
     {
-      title: "Millburn 250th",
-      category: "Municipal Branding / Volunteer",
-      description: "An award-winning visual identity for Millburn Township. A blend of history and modernity designed for the community's milestone celebration.",
-      image: "https://lh3.googleusercontent.com/d/1ZM1Wt1dVT9g7Eerfi_tWsmSWj0trf97c"
+      title: "Youth Outreach",
+      category: "Social Initiative / Volunteer",
+      description: "Creating engaging visual materials for youth-focused programs to foster participation and increase community visibility.",
+      image: "https://lh3.googleusercontent.com/d/1ljHVC8mA3FYW9oNstJiPFSUh5aW55NCf"
     },
     {
       title: "Influencer Brand",
@@ -1487,20 +1508,6 @@ const CommunityPage = () => {
       category: "Community Business / Client",
       description: "Developing robust visual systems for local athletic programs, focusing on energy, performance, and professional appeal.",
       image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Frex-soccer-training.vercel.app%2F?w=1200&h=800"
-    },
-    {
-      title: "Youth Outreach",
-      category: "Social Initiative / Volunteer",
-      description: "Creating engaging visual materials for youth-focused programs to foster participation and increase community visibility.",
-      image: "https://lh3.googleusercontent.com/d/1ljHVC8mA3FYW9oNstJiPFSUh5aW55NCf"
-    },
-    {
-      title: "Project 201",
-      category: "Youth Mentorship / Athletic Advocacy",
-      description: "Custom digital advocate platform and high-conversion referral portals designed for New Jersey's premier sports-counseling organization.",
-      longDescription: "Project 201 is a statewide professional youth mentorship and development organization that integrates intensive athletic development with robust mental health support systems. Operating across five major branches—201 Sports, 201 Boxing, Mentorship Circle, School Programs, and Summer Camps—the organization uses structured daily tracking coordinates to enforce student accountability, performance goals, and parent-student relationship health. I architected and custom-engineered their digital advocacy platform at project201.org to translate this real-world impact transparently. The build elevates key NJ tracking metrics (over 250 youth mentored, a 98% behavior progress rate, and 1,500+ athletic training hours), implements streamlined parent support and referral enrollment flows, and showcases their USA Boxing and elite speed performance speed preps.",
-      image: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fproject201.org?w=1200&h=800",
-      url: "https://project201.org"
     }
   ];
 
